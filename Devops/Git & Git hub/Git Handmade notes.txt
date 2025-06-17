@@ -50,6 +50,21 @@
   git diff :                               View differences between working files and staged files
   
   
+  what is branch?
+  A branch is essentially a separate line of development. It allows multiple developers to work on different 
+  features or bug fixes without affecting the main codebase (often called the main or master branch).
+  
+  Advantages:
+  1. Isolated Envirnament.
+  2. Parallel Development.
+  3. merge Later.
+  
+  Types of branching stratagy:
+  
+  1. Master or main branch
+  2. Feature branch
+  3. Release branch
+  4. Hot fix branch
   
 	 
 	 
