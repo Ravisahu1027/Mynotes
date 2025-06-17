@@ -49,6 +49,18 @@
   git log:                                 View commit history
   git diff :                               View differences between working files and staged files
   git push -u origin main                  Push it to Github repo
+  git remote add                           To add git repo
+  git clone                                To clone repo locally.
+  git checkout -b <branch_name>            To create branch
+  git branch                               To see all branches
+  git checkout <Branch_name)               To switch between branches
+  git log <branch_name>                    To see the logs of specific branch
+  git cheery-pick <commit_id>              To merge the change or commit from any branch
+  git log --oneline                        To check commit in oneline
+  git merge <branch_name>                  To merge feature branch in main branch
+  git rebase <branch_name>                 Re-apply commits from one branch onto another (like replaying them)  
+  
+  
   
   what is branch?
   A branch is essentially a separate line of development. It allows multiple developers to work on different 
@@ -66,7 +78,48 @@
   3. Release branch
   4. Hot fix branch
   
-  C:/Users/ASUS/OneDrive/Desktop/Mynotes/Devops
+  
+  when we initialize git then .git folder is created which is responsible for tracking changes.
+  
+  What is git workflow in your company?
+    
+	Pull Requests / Merge Requests
+	
+    After work is done on a branch:
+    
+    Push to remote.
+    
+    Open a PR (GitHub) / MR (GitLab).
+    
+    Code review by teammates.
+    
+    CI/CD pipelines run.
+    
+    Merge into develop or main after approval.
+	
+   Merging Strategy:
+   
+    Use git merge or squash and merge.
+
+    Some teams prefer git rebase before merging to keep history clean.
+	
+	
+	Git clone : Downloading Repo to local machine.
+	
+	Fork: Copying repo 
+	
+	
+  To merge two branches we have three method:
+  
+  1. Git merge : merge two branch on top of it. if we want to track history not good way to merge.
+  
+  2. Git rebase: merge to branch and good way to track liner changes history.
+  
+  3. Git chery-pick : good way to merge any specific commit from other branch
+  	
+	
+  
+  
   
 	 
 	 
