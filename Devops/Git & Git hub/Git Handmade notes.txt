@@ -13,6 +13,43 @@
     4. See who made what changes and when.
 	
 	
+	Issue version control system resolved are:
 	
+	 1. Sharing of code.
+	 2. Versioning
+	 
+	
+  Centrailized vs Decentralized
+ 
+  Centralized: A centralized system is one where a single central authority (or unit) manages the entire system and controls all decisions,
+               resources, and data processing.
+			   
+			   
+  Decentralized: A decentralized system distributes control, processing, or decision-making across multiple independent or semi-autonomous units.
+
+
+
+  What is fork?
+  fork is a copy of repository that lives under your own user account. It allows you to freely modify the project without affecting 
+  the original repository  
+  
+  What is Git and Git Hub?
+  Git is a distributed version control system (DVCS) that helps you track changes in files, especially code. 
+  It allows multiple developers to work on the same project without overwriting each other's changes.
+  
+  GitHub: GitHub is a web-based platform that hosts Git repositories online and adds collaboration tools on top. 
+  It’s like a social network for code + cloud storage for your Git projects.
+  
+  Git commands:
+  
+  git init:                                Initialize a new Git repository
+  git status:                              Show modified files and their state
+  git add <file> or git add . :            Add a specific file to the staging area or Add all files to staging
+  git commit -m "your message" :           Save your changes with a message.
+  git log:                                 View commit history
+  git diff :                               View differences between working files and staged files
+  
+  
+  
 	 
 	 
