@@ -1,0 +1,50 @@
+
+
+ Shell scripting basics:
+ 
+ 1. To check and restart services is any service is down.
+ 
+ #!/bin/bash
+
+
+SERVICE="nginx"
+
+if  systemctl is-active --quiet "$SERVICE" ;
+then
+        echo " $SERVICE is running "
+else
+        echo " $SERVICE is not running.
+    Restarting now..."
+
+    sudo systemctl restart "$SERVICE"
+
+    if  systemctl is-active --quiet "$SERVICE" ; then
+            echo " $SERVICE has been restarted successfully."
+    else
+            echo "$SERVICES failed to restart, Please check logs."
+    fi
+
+
+fi
+
+shedule it in every fifteen mins and create logs 
+
+1. crontab -e 
+
+*/15 * * * * /path/to/directories/file.sh >> /var/services/logs/nginx_check.log 2>&1 
+
+
+
+ 2. Delete files more the 75 days
+ 
+ #!/bin/bash
+
+find . -type -f -name "*.log" -exec -mtime +75 rm -f{} \;
+
+shedule it on every sunday
+
+ crontab -e
+ 
+ 0 3 * * 0 /path/to/directories/file.sh >> /var/logs/cleanup.log 2>&1
+ 
+ 

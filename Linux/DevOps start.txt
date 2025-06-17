@@ -1,0 +1,252 @@
+
+ Before DevOps We have other models:
+ 
+ Waterfal model:
+ 1. Requirment  2. design  3. Implementation 4. Test 5. Deployment
+ 
+ Drawback:
+ 1. Required lots of time before bussiness goes live.
+ 2. Lack of communication between Bussiness, Devlopment and operations team.
+ 3. we cannot change application after deployment.
+ 
+ Agile:
+ Agile is a software development methodology that focuses on iterative development, collaboration, customer feedback, and flexibility to change.
+ 
+ 1. Plan  2. code  3. build  4. Test  5. Release  6. deploy 7. Review 8. Repeate
+ 
+ Drawback: 
+ 1. Lack of communication between operations and development team.
+ 
+ 
+ 
+ What is DevOps?
+ DevOps is a set of practices and tools that integrates software development (Dev) and IT operations (Ops). The goal of DevOps is to shorten the software development lifecycle and provide continuous delivery with high software quality.
+ 
+ Key Concepts of DevOps:
+ 
+ 1. Collaboration
+ 2. Continuous integrations / continuous Devlopment (CI/CD)
+ 3. Monitoring
+ 4. Infrastucture as a code 
+ 5. Automation 
+ 
+ 
+ -------------------------------------------------------Docker-----------------------------------------------------------------------------
+ 
+ What is containerization?
+ Containerization is a lightweight form of virtualization that involves packaging an application along with all its dependencies (libraries, configuration files, binaries) into a single, self-contained unit called a container.
+ 
+ Your First Docker Usecase
+ 
+ # Run a Docker container with a Python hello world application in detached mode
+ docker run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE
+ 
+ # Run a Docker container with a Java hello world application in detached mode
+ docker run -d -p 5000:5000 in28min/hello-world-java:0.0.1.RELEASE
+ 
+ # Run a Docker container with a Node.js hello world application in detached mode
+ docker run -d -p 5000:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
+ 
+ # View the logs of a Docker container
+ docker logs 04e52ff9270f5810eefe1f77222852dc1461c22440d4ecd6228b5c38f09d838e
+
+ # View the logs of a Docker container with a given container ID or name
+ docker logs c2ba
+ 
+ # List Docker images
+ docker images
+ 
+ # List running containers
+ docker container ls
+ 
+ # List all containers, including stopped ones
+ docker container ls -a
+ 
+ # Stop a running container with a given container ID
+ docker container stop f708b7ee1a8b
+ 
+ 
+   DOCKER ARCHITECTURE
+   -------------------          
+   
+   
+                         Docker client
+						      |
+						 Docker Daemon
+						      |
+	                          |					 
+			 Containers    Images      Container registery			  
+						 
+						 
+	When we run a command docker client sent the command to docker daemon who is responsible to manage container, images and registery.
+
+
+    🔧 1. Docker Engine
+  The heart of Docker. It's a client-server application with three main components:
+  
+  a. Docker Client
+  CLI tool (docker) that users interact with.
+  
+  Sends commands (like docker build, docker run, etc.) to the Docker daemon using a REST API.
+  
+  Can connect to remote Docker daemons.
+  
+  b. Docker Daemon (dockerd)
+  The background service running on the host machine.
+  
+  Responsible for building, running, and managing Docker containers.
+  
+  Communicates with other daemons and handles container orchestration.
+  
+  c. Docker REST API
+  The interface used by the client to interact with the daemon.
+  
+  Provides access to Docker functionalities programmatically.
+  
+  
+  
+  Reasons why docker is popular:
+  1. standarized packaging
+  2. Multi platform support 
+  3. Ligh-weight & isolation
+  
+  IMAGES: 
+  A Docker Image is a read-only template that contains everything needed to run an application:
+
+  Application code
+  
+  Libraries
+  
+  Dependencies
+  
+  Configuration files
+  
+  Images are created using a Dockerfile and serve as the blueprint for creating Docker Containers.
+  
+  CONTAINERS:
+  A Docker Container is a lightweight and isolated and  running instance of a Docker image.
+  
+  It uses the image as a base and adds a writable layer on top.
+  
+  Containers can be started, stopped, moved, or deleted.
+  
+  # List Docker images
+  docker images
+  
+  # Pull a Docker image from a registry
+  docker pull mysql
+
+  # Search for Docker images in a registry
+  docker search mysql
+  
+  
+  
+  note: Docker images are built with layers
+  
+  # Show the history of a Docker image
+  docker image history in28min/hello-world-java:0.0.1.RELEASE
+  
+  # Show the history of a Docker image with a given image ID
+  docker image history 100229ba687e
+  
+  # Inspect a Docker image
+  docker image inspect 100229ba687e
+  
+  # Remove a Docker image
+  docker image remove mysql
+
+  # Remove a Docker image with a given image name and tag
+  docker image remove in28min/hello-world-java:0.0.1.RELEASE
+
+  # Remove a Docker container with a given container ID or name
+  docker container rm 3e657ae9bd16
+  
+  # List all containers, including stopped ones
+  docker container ls -a
+
+  # Pause a running container with a given container ID or name
+  docker container pause 832
+
+  # Unpause a paused container with a given container ID or name
+  docker container unpause 832
+
+  # Stop a running container with a given container ID or name
+  docker container stop 832
+
+  # Inspect a Docker container with a given container ID or name
+  docker container inspect ff521fa58db3
+  
+  #Kill a running container with a given container ID or name
+  docker container kill 832
+  
+  # Remove all stopped containers
+  docker container prune
+  
+  
+  Note: Difference between stop and kill. when we stop a container it stops background application and giving them time to shutdown gracefully.
+        where as when you kill it shut down imediatly without giving time to shutdown gracefully.
+		
+		
+		when we stop it sends signal to SIGTERM and when we kill it sends signal SIGKILL
+		
+		
+		
+		
+  # Show Docker system information
+  docker system
+  
+  # Show Docker disk usage
+  docker system df
+  
+  # Show detailed Docker system information
+  docker system info
+  
+  # Remove all unused Docker resources
+  docker system prune -a
+  
+  # Display the top resource-consuming processes of a Docker container with a given container ID or name
+  docker top 9009722eac4d
+  
+  # Show live resource usage statistics of a Docker container with a given container ID or name
+  docker stats 9009722eac4d
+  
+  # Run a Docker container with a Java hello world application, limited to 512MB memory
+  docker container run -p 5000:5000 -d -m 512m in28min/hello-world-java:0.0.1.RELEASE
+  
+  # Run a Docker container with a Java hello world application, limited to 512MB memory and CPU quota of 50%
+  docker container run -p 5000:5000 -d -m 512m --cpu-quota=50000 in28min/hello-world-java:0.0.1.RELEASE
+  
+  # Show Docker system events
+  docker system events
+  
+  
+  
+  
+  
+  # Show live resource usage statistics of a Docker container with a given container ID or name
+  docker container stats 4faca1ea914e3e4587d1d790948ec6cb8fa34f26e900c12632fd64d4722fd59a
+  
+  # Show live resource usage statistics of a Docker container with a given container ID or name
+  docker stats 42f170966ce613d2a16d7404495af7b3295e01aeb9142e1fa1762bbdc581f502		
+  
+  
+  
+  Building application from scratch:
+  
+  1. Create docker file.
+  
+  2. To create docker image - run command - docker build -t <name and tag> .
+  
+  3. then create docker container from docker image - docker run -d -p 5000:5000 <container name> <image name>
+  
+  
+  
+  # Show the history of a Docker image with a given image ID
+  docker history e66dc383f7a0
+
+  # Push a Docker image to a registry
+  docker push in28min/hello-world-python:0.0.2.RELEASE
+  
+  
+  
+  

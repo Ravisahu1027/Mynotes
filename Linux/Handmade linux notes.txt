@@ -1,0 +1,1715 @@
+------------------------------------------------------Linux From Basics: EP 7------------------------------------------------------
+  
+  Linux Arcitecture:
+  Hardware
+  Kernel
+  shell
+  commands
+  applications
+  
+  Hardware: To know hardware info we use:  dmidecode or cat /boot/grub/grub.conf
+  
+  Kernel: Core component of linux.  use to manage Device drivers,Network, storages, scheduled task and security 
+          of a linux operating system. uname -r( to know linux kernal)
+  
+  shell: it is interface between user and kernal and use to interprete command into binary language give to kernal
+         so that hardwares can understand.
+	   
+	   
+------------------------------------------------------Filesystem hierarchy: EP 8----------------------------------------------------	 
+ 
+ Root Directory(/) :- Parent directory of all directory. Under which all directories are present. 
+					  It is a home directory of root user. 
+ 
+ Root User: Super user who have all the access to perform any task.  its uid is 0 and gid is also 0.
+ 
+ /home: Home directory of normal user. When we create new user it is created under this directory.
+ 
+ /boot: All the boot related files comes under this. When we power on the Linux operting system. These files excuted and 
+       starts the system. it also contain kernel information.
+	    cat /boot/grub/grub.conf
+ 
+ /etc: it contain all configration related files related to network, OS, applications, system, users.
+ 
+ /usr: by default softwares are installed in this directory.
+ 
+ /opt: it is optional directory.
+ 
+ /bin: all the binary excutable file for normal users are stored in this directory.
+ 
+ /sbin: all the binary excutable file for super user (root user) are stored in this directory.
+ 
+ /dev: It contain all device related files. like SDA1, SDA2.
+ 
+ /proc: all the process related information files comes under this directory.
+ 
+ /var: it contain all the variables files like system log files comes under this.  
+ 
+ /mnt: it is the default mount point for any partitions.
+ 
+ /media: all external devices first detect by this directory.
+ 
+ /lib: it contain all library files. 
+ 
+ 
+--------------------------------------------------------------Linux Basic Command: EP 9-----------------------------------------------
+
+  
+ scenerio based command:
+  1). Creating file in linux.(never use vi command to create file)
+      use cat command to create. cat > file.txt and ctrl+d  to save file.(can only create one file using cat command at a time)
+	  
+	  To create multiple files use touch command. like touch file1.txt file2.txt
+	  
+  2). To display the content of file. 
+      use cat command to display content.
+  
+  3). Append the data into existing file.
+      use echo command or cat command.
+	  ex. cat >> file1.txt and write the lines and ctrl+data
+	      echo "Hello world" >> file1.txt
+		  
+  4). create multiple files using touch command.
+  
+  5). Creating directories using mkdir with options.
+     when we create directories or files we also have to give permisions. so for that we use 
+	 eg. $ mkdir myname
+	     $ cd ../
+		 $ chmod 775 myname
+		 or 
+		 $ mkdir -m 775 myname ( option m is for mode)
+		 
+	Creating multiple directories using 'mkdir -p' command. 
+	eg. $mkdir -p basiccommand/{linux/{redhat,ubuntu},windows/{win7,win10},mac}
+  
+  
+	  
+  6). copy files into directories. 
+      To copy file or single directory we can give.
+	  $ cp file1.txt path/to/directories
+	  
+	  if we want to copy directory over directory with all content under directories we use.
+	  $ cp -rvfp path/to/directory. ( r=recursivly, v=show output, f=forcefully, p=parent directories)
+	  
+  7). moving files or directories/ Renaming files and directories using 'mv' command.
+      $ mv file1.txt path/to/directory
+	  and $ mv file1.txt file2.txt (rename file/directories)
+	  
+  8). remove files and directories using rm command.
+      $ rm file1.txt (remove file or empty directories)
+	  $ rm -f (remove file forcefully)
+	  $ rm -rf (remove directories over directories forcefully)
+	  
+
+-------------------Linux Basic Command Vi And Vim Editor ,Command Mode ,Insert Mode ,Extended Mode: EP 11------------------------------
+ vi - visual display editor
+ vim- modified vi
+
+ it has three mode
+  1. command mode
+  2. insert mode
+  3. extended command mode
+  
+  command mode shotcut keys:
+  gg :  go to beigning of the page.
+  G : go to end of the page.
+  w : move cursour forward word by word.
+  b : move cursour backward word by word
+  nw : move the cursour forward n number of words(5w).
+  nb : move the cursour backword n number of words(5b).
+  u : undo the last change.
+  ctrl+R : redo changes.
+  yy :  copy lines.
+  nyy : copy n number of lines (5yy).
+  p : paste the line below cursour.
+  P :  paste the line above cursour.  
+  dd : delete a line.
+  dw : delete a word.
+  x : delete a character.
+  ndd : delete n number of lines (5dd).
+  /word to search : search a word. press n to go top to bottom.
+  
+  
+  Extented mode (:)
+  Esc+q! : exit without saving file.
+  Esc+wq! : save and exit.
+  Esc+w : save change.
+  Esc+se nu : set line number to the file.
+  
+  
+---------------------------------Linux Basic Command, Grep Expression, Pipelines, I/O Redirect: EP 12----------------------------------
+  grep command is used to search for pattern in file or directory.
+  eg. grep [option] pattern file/directories.
+      grep allowed file1.txt.
+ 
+  grep -c allowed file1.txt (it will give count or no. of occurance of that pattern).
+  grep -n allowed file1.txt (display line no. and pattern).
+  grep -i allowed file1.txt (search pattern even ignore case sensitive capital small character.
+  
+  
+---------------Linux Basic Command, Softlink, Hardlink, Inode, Normal file, Directory file : EP 13------------------------------
+
+ types of a file:
+ 
+ symbol         type
+   -            Normal file
+   d            directory
+   l            links(soft/hard link)
+   b            block
+   c            character
+   
+   
+   symbolic links
+   
+   Soft link: ln -s file name path/to/directory
+   1. shortcut file.
+   2. if original file is deleted, links broken and data lost.
+   3. inode number of src link and file is different.
+   4. can be created across the partition.
+
+   Hard link: ln file name path/to/directory
+   1. Backup file.
+   2. if original file is deleted then also link will contain the data.
+   3. inode number of src and file is same.
+   4. cannot be created across the partition.
+
+
+  if disk space is full and we clear some space still we are not able to create file inside any partition or directories.
+   check df -i to check inode utilisation.  
+   
+   find . -inum <inode no.> -exec rm -i {} \; ( delete inode )
+   
+   
+-----------------Linux Basic Command, Filter Commands, Sort, Cut, Sed, find, locate, less, more : EP 14---------------------------------
+  
+  less : see o/p line wise or page wise.
+  more : is exactly same like less ( it shows percentage of completion)
+  head : displays top 10 lines of the file.
+  tail : display last 10 lines of the file.
+  sort : to sort the output in numeric or alphabetic order.
+  unique: remove duplicate value and display output
+  cut : pick the given expression(in columns) & display output.
+  sed : sed stands for stream editor.
+  awk : 
+  find : find the file or directory's path(recommanded)
+  locate : find the file or directory's path(optional)
+  
+  if we want first columns of /etc/passwd
+   $ cut -d: -f1 /etc/passwd ( -d: to remove all delimeter and -f1 means first field).
+   
+   $ sed 's/max/john/g' /etc/passwd ( search for max and replace it with john globally).
+   
+   
+---------------------Linux Basic Command, Find And Locate Commands In Depth : EP 15----------------------------------------------------
+   
+   
+ find command: 
+
+ syntex: find <path/to/directory> -option filename
+
+ options                    usage
+ 
+ -name       To search file with name
+ -inum       To search file with inode number
+ -type       To seach file with respect to user
+ -group      To seach file which belongs to particuler group
+
+ Find command production example:
+
+ 1. To find and remove inode.
+   - find . -inum <inode number> -exec ls -il {} \;  to find ( . mean present working directory)
+   - find . -inum <inode number> -exec rm -i {} \;  to remove 
+   
+ 2. To list and delete a file.
+   - find <path/to/directory> -type f -name ".log" -exec ls -lrth {}\;      To list 
+   - find <path/to/directory> -type f -name ".syslog" -exec rm -rf  {} \;   to remove file with .syslog extentions.
+   
+ 3. To Find file with time and size.
+   -find . -type f -size +10M 
+   -find . -type f -mtime -75   
+   
+   
+-------------------------------------------Linux Basic Command | File Permission : EP 16--------------------------------------------
+
+ permissions are applied on three levels:
+ 1) owner level
+ 2) group level
+ 3) others level
+ 
+ 
+ access modes of three types:
+  R read only
+  W write/append/edit/delete
+  X excute/run a command
+ 
+ Permission can be set on any file/ directories in two ways.
+ 1. symbolic method (ugo) 
+    u = owner, g = group, o = other
+   ex. chmod u+rwx,g+rx,o=rx myfile1.txt
+       
+ 2. absolute method (number)
+    Read = 4, Write = 2, excute = 1
+	ex. chmod 744 myfil1.txt  (u=rwx, g=r, o=r)
+	
+ umask =0002 (user file creation mask) hold the default permission information of file/directory  
+  default full permission for file = 664
+  default full directory permission = 755
+  
+  
+--------------------------------------------------Managing Partition and File System In Linux : EP 17---------------------------------
+   
+ 
+ 
+ 1) what is partition?
+
+ = Dividing the storages into many parts for effectly and efficiently used.
+
+ 2) Disk partition criteria?
+ 
+ =>
+       -----------------------------------------------------------------
+       |   |   |   |   |            EXTENTED PARTITION                 |   
+	   |   |   |   |   |                                               |
+	   | M | P | P | P |-----------------------------------------------|
+	   | B |   |   |   |  L1 |  L2 | Ln |          FREE                |
+	   | R |   |   |   |     |     |    |                              |
+	   -----------------------------------------------------------------
+ 
+ 
+    MBR = MASTER BOOT record                                              Criteria 
+	                                                                        3P
+	P = PRIMARY Partition                                                  2P+1E
+	E = EXTENTED Partition                                                 1P+1E
+	L = LOGICAL Partition
+	
+	upto 16 logical partition we cam make 
+	
+	
+   
+   fdisk -l : partition table information
+  
+	  
+ 3) Disk identification.
+ 
+    There are three types of disk identification.
+	 a) IDE (integrated drive electronics)               /dev/hda
+	 b) SCSI (small computer system interface)           /dev/sda
+	 c) virtual drive                                    /dev/vda 
+	 
+	 
+  4) what is filesystem and what types of filesystems?
+    
+	it is a method to organise data in structured way in linux is called filesystem.
+	
+	types of filesystems:
+	
+	a)ext2 : 1. it stand for second extended file system.
+	         2. ext2 does not have journaling features.
+			 3. max individual file size can be 16 gb to 2 tb.
+			 
+	b)ext3 : 1. it stand for third extended file system.
+             2. it allow journaling features.
+             3. max individual file size can be 16 gb to 2 tb.
+			 
+    c)ext4 : 1. it stand for forth extended file system.
+             2.	support huge individual file size and overall file system size.
+			 3. max individual file size can be 16 gb to 16 tb.
+			 
+	d)xfs : 1. the xfs file system is an extension of the extent file system.
+	        2. xfs is a high performanace 64-bit journaling file system
+			3. xfs supports max file system size of 8 exbitytes for the 64-bit file system.
+			
+
+ 5) mounting : it is a process of making a filesystem accessible to the operating system and users.
+ 
+ 
+    . cat /etc/fstab : to check mounting of partition ( parmanent info)
+    . cat /etc/mtab : store mounting info dynamically ( dynamic info)
+ 
+ 
+ 
+------------------------------------Managing Partition and file system In Linux : EP 18 -----------------------------------------------
+
+ . fdisk -l : To view existing partion
+ . parted -l : Detailed info about disk partitions.
+ . lsblk : list the disk partitions.
+  
+    To create new disk partition.
+	
+	1. Request for raw disk or LUN( Logical unit number) from storage team.
+	
+	2. scan a LAN 
+          To scan a LUN we use - 	
+		  $ echo "___" > /sys/class/scsi_host/host0/scan
+                note: The Three dash ("___") of the command act as a wildcards meaning rescan everything. remember the three values
+		        stand for channel , SCSI target ID, LUN.
+				
+		 But we don't know which scsi disk is use. so we will scan every scsi disk and 
+		 after every scan check if new disk was detected by running command lsblk. 
+		 
+		  $ echo "___" > /sys/class/scsi_host/host0/scan then run - lsblk
+		  $ echo "___" > /sys/class/scsi_host/host1/scan then run - lsblk
+		  $ echo "___" > /sys/class/scsi_host/host2/scan then run - lsblk
+		  
+  3. To Create partition we use fdisk <disk name> command.
+       
+	   fdisk <disk name>
+	    $ fdisk /dev/sdc 
+		
+  4. press m and we will get different options to create, delete, list, save, verify partition table etc.
+     
+  5. To create press n to crete new partition.
+  6. select ( according to criteria i.e  3p, 2p+1e, 1p+1e)
+       p primary partition
+	   e extented partition
+	   
+  7. Partition number(1-4): 
+  8. select stating cylinder(1-1305):
+  9. select ending cylinder (1-1305):
+   
+   note: logical partitions are created under extented partition only.
+   
+  10. after creating extended partition again if we press n it will show us logical partition l.
+  
+  11. select cylinder starting and ending according to how many logical cylinder we want to create.
+  
+  12. press p to print the partition.
+  
+  13. Press w to save partition.
+  
+   but we also have to update the partition table.
+   
+  14. use command partprobe /dev/sdc : update partition table without restarting system.
+      run below command 2 times to update partition table.
+	  
+	  partprobe /dev/sdc
+	  partprobe /dev/sdc 
+	  
+	  
+	  
+  15. Now we have to format the partition with filesystem.    
+      
+	  
+    use command to format all partition 
+	            mkfs.ext4 /dev/sdc1 
+	            mkfs.ext4 /dev/sdc2
+				mkfs.ext4 /dev/sdc3
+				mkfs.ext4 /dev/sdc4
+	
+	note: we can only formate to xfs from version 7 of redhat.
+	
+  16. we have to mount the partition to use the psrtition.
+  
+      mounting is divided into 2 part - temporary mounting (/etc/mtab) & parmanent mounting (/etc/fstab)
+	  
+	  all temporary mount information recorded in mtab file.
+	  
+	  To mount any partition first create directory.
+	    go to root directory cd /
+		mkdir <give directory name>
+		mount /dev/sdc1 /path/to/directories   < this will mount partition temporary>
+		
+     To mount parmanently.
+       1. vi /etc/fstab 
+       2. copy last entry and paste next to it. mount -a
+       3. 1st column is for disk partition. 2nd is for mounting directory. 3rd filesystem type. save the file.
+ 
+  question: How many fields are their in fstab file ?
+  answer  : there are total 6 fields will be there.
+            1st - device name, 2nd - mount point , 3rd - type of filesystem, 4th - mount option, 5th- dumping, 6th - sequece  
+	  
+	  
+  TO UNMOUNT THE Directory 
+   use umount <directory name>  (temporary unmount)
+   To unmount parmanently edit /etc/fstab file and delete the entry for required directories to unmount.
+   
+   TO MOUNT All Directory use mount -a in /etc/fstab 
+   
+   Commands:
+   
+   . fdisk -l : To view the existing partition.
+   . fdisk <disk name> : partition administration using fdisk.
+   . n : Creating a new partition.
+   . w : saving partition.
+   . partprobe /dev/sdc : updation partition table without restarting system.
+   . mkfs.ext4 /dev/sdc1 : formatting a partitionwith ext4 file system.
+   . mount <Directory name> : Temporary(/etc/mtab) & parmanent mounting (/etc/fstab)
+   . umount : un-mounting a directory from partition.
+   . mount -a: mount all the file system of /etc/fstab
+   
+   question: Sometimes we are inside a directory or some other users using this directory and we try to unmount getting error 
+             directory is busy.
+			 
+	solution: May be because some one or myself inside that directory.
+              if others is using 
+              . fuser -cu /dev/sdc1	 ( it will show list of user using that device.)
+                ask user to come out of that directory ( drop mail or communicate them )
+                or
+              . fuser -ck /dev/sdc1 ( it will terminate all users from that partition and the we can umount that device.)
+			  
+   ID of linux = 83
+   id of swap = 82
+   id of LVM = 8e		  
+			  
+------------------------------------Managing Partition and file system In Linux : EP 19 -----------------------------------------------
+   
+  swap memory : it is a virtual memory if the amount of system memory is full and system need more memory but 
+   RAM is full OS moves inactive pages (less used data) from RAM to swap. This frees up RAM for active processes.
+
+ How swap memory calculated?
+  1. if RAM IS 2GB then SWAP MEMORY = 2 X SIZE OF RAM
+  2. if RAM IS MORE THEN 2 GB then SWAP MEMORY = 2 + SIZE OF RAM
+  
+  
+  . free -m : To see memory size and swap memory.
+  . swapon -s : To see swap memory usage.
+  . mkswap : To formate the partition with swap file system.
+  . swapon : To activate swap space use.
+  . swapoff : To deactivate swap space use.
+  
+  To create or change swap memory:
+    1. fdisk /dev/sda 
+	2. Select options and create or change ID.
+	3. partprobe /dev/sdc2 ( select the partiton we just change )
+	4. partprobe /dev/sdc2 
+	5. fdisk -l ( list of partitions)
+  
+  To Formate swap memory
+   mkswap /dev/sdc2
+   
+  To Activate swap memory 
+  swapon /dev/sdc2 
+  
+-------------------------------------Linux Logical Volume Manager or Management ( LVM) : EP 20---------------------------------------- 
+
+ LVM: Logical volume managment
+ 
+   LVM stands for Logical Volume Manager. It's a powerful way to manage disk storage in Linux.
+   
+    1. Create flexible disk partitions (called logical volumes)
+
+    2. Resize volumes (increase or decrease size) without unmounting
+
+    3. Span a volume across multiple disks
+
+    4. Take snapshots of volumes (great for backups)
+
+
+ Arcitecture of LVM :
+ 
+                PHYSICAL VOLUME                VOLUME GROUP                LOGICAL Volume
+               -----------------              -------------                 
+               |               |              | 10gb       |                ------
+               |  10 GB        |              |            |                |3GB |  LV003
+			   |   /dev/sda1   |              | VG003      |                ------ 
+               |normal partition|             |            |                
+               |               |              |            | 
+               -----------------              --------------      
+
+   From physical volume we can create multiple volume group and we can create as much logical volume we want as per requirment.
+   
+   we can increase decrease size of logical volumne as per the demanad. this is the reason we create logical volumne.
+   
+   Components of LVM:
+   1. PHYSICAL VOLUME(PV).
+   2. PHYSICAL EXTEND(PE).
+   3. VOLUME GROUP (VG).
+   4. LOGICAL VOLUME(LV).
+   5. LOGICAL EXTEND (LE).
+   
+   Question: What is Physical extend and what is the unit size of phyical extend?
+   answer : In LVM , a physical extent is the smallest chunk of space that LVM uses to allocate storage from physical volume(PV) 
+            to a logical volume.
+			The default size is 4mb but we can set it mannually when creating the volume group. the minimum size is 1MB.
+			
+	 
+	 COMMANDS:
+	 . pvs: Display physical volume.
+	 . vgs: Display volume group.
+	 . lvs: Display logical volume.
+	 . pvdisplay: Detailed phyical volume.
+	 . vgdisplay: Detailed volume group.
+	 . lvdisplay: Detailed logical volume.
+	 . pvcreate: creating physical volume.
+	 . vgcreate: creating volume group.
+	 . lvcreate: creating logical volume.
+	 . vgextend: extending volume group.
+	 . lvextend: extending logical group.
+	 . lvreduce: reduce logical volume.
+	 . pvremove: removing physical volume.
+	 . vgremove: removing volume group.
+	 . lvremove: removing logical group.
+	 
+	 
+  Creating physical volume:-
+   we have to ask for lun then we have to run echo "___" /sys/class/scsi_host/host0/scan check lsblk. if not scanned run echo for
+    other host as well. now formate the partitions fdisk /dev/sda select m and n. give info. then press p to see the partition created
+    or not. now select l for partition type and change the type to LVM- 8e. Now after changing run command pvcreate /dev/sda1.
+	it will create phyical volume. check it by pvs command or pvdisplay.
+	
+  Creating volume group:-
+   check if any volume group is there or not by vgs command. now to create run command vgcreate <name> <disk partition>
+    i.e vgcreate mygroup /dev/sdc1. now check by command vgs or vgdisplay.
+	
+	Note:  if by mistake we directly create vgcreate insted of pvcreate or before pvcreate. Reason both are identical
+	       but we have to create volume group before creating logical volumes.
+  
+  Creating Logical volumes:-
+    check if any logical volume is there or not by lvs or lvdisplay. now create by running command 
+	lvcreate -L <size of lv from vg> -n <name> <vg name> (L is for size and n is for name)
+	i.e lvcreate -L 2GB -n lv001 mygroup
+	
+  Formatting LV with filesystem:-	
+	once created formate this logical volume with filesystem.
+	i.e mkfs.ext4 /dev/mygroup/lv001 
+	
+  Creating directory and mounting LV	
+	create directory and mount it.
+	 mkdir /mynewdirectory 
+	 for parmanent mounting we will edit /etc/fstab and entry your new lv and directory and filesystem.
+	 once done run command mount -a
+	 
+  Extend this logical volume:-
+   give the command -
+      lvextend -L +1GB  <logical volume path>
+      i.e lvextend -L +1GB /dev/mygroup/lv001
+
+   To update the filesystem run command.
+        resize2fs /dev/mygroup/lv001
+	 
+ --------------------------------------------Linux Logical Volume Manager or Management ( LVM): EP 22----------------------------------- 
+
+  1. Reducing Logical volume(LV).
+      first we have to raise a change and inform to all teams like network, db, managment.
+	  we have to perform in downtime.
+	  check size by df -h command.
+	  we have to open /etc/fstab and comment the entry.
+	  now umount /mynewdirectory
+	  check if directory was unmounted or not by df -h command.
+	  now we have to check and repair ext2/ext3/ext4 filesystems by running command e2fsck -f /dev/mygroup/lv001.
+	  above command will organise data in one side so that we can reduce size from other side.
+      we have to run command - resize2fs /dev/mygroup/lv001 1GB (value which left after reduction)
+      run command - lvreduce -L -1GB /dev/mygroup/lv001 
+      know run command - lvs to check resize lvs.
+      open /etc/fstab and uncomment the entry.	
+      now do mount -a 
+      run df -h to check 
+ 2. Delete the Logical volume.
+     we have to open /etc/fstab and comment the entry.
+	 umount /mynewdirectory
+	 lvremove /dev/mygroup/lv001 
+	 
+ 3. Delete volume group (vg).
+    vgremove mygroup 
+ 
+ 4. Remove physical volume.
+    pvremove /dev/sdc1 
+
+ 5. create Physical extend (PE)
+    check lun by - lsblk.
+    create pv - pvcreate /dev/sdc1
+	run to see blocks - fdisk 
+	covert gb into mib 
+    create vg - vgcreate mygroup -s <mib> /dev/sdc1
+ 
+ 6. create logical extent (LE)
+    
+	check the size by - lvs 
+	convert gb into mib 
+	create lv - lvcreate -l 1024 -n lv001 mygroup 
+	
+	formating LV with filesystem-  mkfs.ext4 /dev/mygroup/lv001
+	once done open /etc/fstab and uncomment entry.
+	mount -a 
+ 
+	  
+ ------------------------------------ Linux User and Group Administration : EP 23 --------------------------------------------------
+
+ What is user administration?
+ 
+ UID : every user has unique identification id.
+ 
+ important points:-
+  1. users and groups are used to control access to files and resources.
+  2. users can login using their ID and password.
+  3. every file in system is owned by user associated with group.
+  4. every process has an owner and group affliation and can only access the resource its owner and group can access.
+  5. every user assigned a unique identification id.
+  6. user name and uid are stored under /etc/passwd file.
+  7. user's password are stored under /etc/shadow file in encrypted form.
+  8. users are assign a home directory and program that is run when they login.
+
+ question: why we do not store user and password in same file ?
+ answer: Because of security as /etc/passwd access can be given read access to some users 
+         but /etc/shadow can be only access or read by root user.
+		 
+		 
+ Types of users           example            uid            gid            home directory              shell
+  
+  1. super user             root              0               0            /root                     /bin/bash
+  2. system user       ftp,ssh,apache      1 to 499       1 to 499        /vat/ftp                   /sbin/nologin
+  3.normal user         max,ravi,amita     500 to 6000    500 to 6000     /home/username             /bin/bash  
+  
+  
+  what is system user?
+   when we install any application or program by default a system user is created.
+   
+   important file.
+   /etc/passwd - user related info are kept in this file.
+   /etc/shadow - password related infomation are kept in this file.
+
+  1. /etc/passwd - it has total 7 fields.
+  
+       root:x:0:0::/root:/bin/bash
+     1st field - user name.
+     2nd field - link to password file. i.e /etc/shadow.
+     3rd field - uid (user id)
+     4th field - gid (group id)
+     5th field - comments.
+     6th field - home directory of user.
+     7th field - shell 	 
+	 
+  2. /etc/shadow - it has total 9 fields.
+  
+     1st field - user name.
+     2nd field - password in encrypted form. 
+     3rd field - day since the password was last changed.
+     4th field - day after which the password must change.
+     5th field - day before password expire that user warned.
+     6th field - day after the password expired user will disabled.
+     last 3 fields are reserved.
+
+ In /etc/shadow file user password not set you will see !! in 2nd field. If it is locked you will see !encrypted password in 2nd field.	 
+	 
+----------------------------------------------Linux User and Group Administration: EP 24------------------------------------------------
+   
+            
+   
+ Creating user's by below attribute:-
+  
+  notes: from where we get infomation about what should be value of uid , gid, min and max password created, 
+  expire info - /etc/login.defs file.
+  
+  
+  syntex: useradd or adduser <user name>
+  
+  -u userID of the new account.
+  -G list of supplementary group of the new account.
+  -g name or ID of the primary group of new account.
+  -d home directory of new account.
+  -c or --comment for comment.
+  -s or --shell for login shell of new directories.
+
+ Creating password for user we created.
+ 
+   syntex: passwd <username> 
+   
+ Modifing existing user info.
+ 
+  syntex : usermod -option <username>
+  
+  -u userID of the new account.
+  -G list of supplementary group of the new account.
+  -g name or ID of the primary group of new account.
+  -d home directory of new account.
+  -c or --comment for comment.
+  -s or --shell for login shell of new directories.
+  -l To change login name.
+  -L To lock account.
+  -U To unlock account.
+  
+
+ ----------------------------------------------Linux User and Group Administration : EP 25-----------------------------------------
+ 
+   1. Changing of password parameter.
+   
+     syntax: chage <username> or <option><value><username>
+	  -m for min password age
+	  -M for max password age
+	  -d for last time the password is changed.
+	  -W password expiration warnings.
+	  -l password inactive [-1 means inactive]
+	  -E A/C expiration date.
+	  
+	  To List any user password related information run command : - chage -l <username> 
+	  
+	  Question: How can we set that our password never expire?
+	  solution : chage <username> and set max password age = -1 and account expiration = -1 
+	  
+  2. How to delete a user
+      
+     syntex : userdel <option> <username>
+        -r for removing user and its home directory.
+        -f for removing user forcefully.
+     
+     question: sometime we delete user without -r option so does not delete user home directory. which give us error when we create 
+               user with same name. always delete user with -r option.
+			   userdel -r <username>
+                           
+
+----------------------------------Linux User and Group Administration :EP 26------------------------------------------------------------						   
+   
+   Important points about group administration:
+   1. users are assign to a group with unique group ID numbers (GID).
+   2. Each name and GID stored in /etc/group file.
+   3. Each user are given their own private group.
+   4. They can also be added to other groups to gain additional access.
+   5. All users can share files belongs to their group.
+   
+    Group and GID are stored in /etc/group file
+	group password are stored in /etc/gshadow file
+	
+	1). Creating group 
+	    syntex: groupadd <options> <group name>
+		
+		 -p  to set password
+		 -g  to use gid
+		 -f  to create forcefully
+		 -r  to create system account
+		 -k  to set key value
+		 
+	2). To set password to existing group 
+        systex : gpasswd <group name>
+
+    3). To modify group properties.
+        syntex : groupmod <option> <argument> <group name>
+           -g  to change group id 
+           -o  to override the previous assigned id
+           -n  to change the group name
+
+    4). Adding or removing user to a group.
+        syntex : usermod <option> <group name> <username>	
+		 -G   for adding secondary group to user.
+		 -M   for adding multiple user to a group.
+		 -A   for adding a group administrator.
+		 -a   for adding single user to a group.
+		 
+    5). Removing user from group.
+	   syntax: gpasswd -d <username> <groupname>
+	   
+	   
+	   
+--------------------------------------Basic Linux Command // Network Configuration And Troubleshooting : EP 27---------------------------
+
+	   
+		 
+ Networking Basic requirment.
+ - NIC : network interface card.
+ - media
+ - Topology
+ - protocol
+ - IP address
+ 
+   ifconfig : To search for ip address.
+   ip -a:  To search for ip address.
+   cat /etc/sysconfig/network-script/ifcfg-eth0 - NIC info static ip we can change from here.
+   cat /etc/sysconfig/network : To change hostname we can edit this file.
+
+  How to set static ip address?
+  1. Edit /etc/sysconfig/network-script/ifcfg-eth0 file.
+  2. systemctl restart network
+  
+  View hostname	hostname
+  Change hostname (temporary)	sudo hostname new-hostname
+  Change hostname (permanent)	Edit /etc/hostname and /etc/hosts
+  
+  Local DNS server hostname and ip are stored in /etc/resolv.conf
+  
+  DNS (Domain Name System) translates human-readable domain names (like example.com) into IP addresses (like 192.0.2.1) 
+   that computers use to identify each other on the network.
+   It’s essential for browsing, email delivery, and other network services.
+ 
+  
+  How do you check DNS resolution on a Linux machine?
+   by using three commands:
+    
+     nslookup example.com
+     host example.com
+
+  How to configure a DNS client in Linux?
+    Edit /etc/resolv.conf
+	
+  What is /etc/hosts file used for?
+   It's a local file that maps hostnames to IP addresses, used before querying DNS.  
+   
+  How to perform a reverse DNS lookup?
+    host 192.168.1.10  
+	
+	
+    dig -x 192.168.1.10
+	for resolving dns we use nslookup command and for forward or reverse dns we use dig command.
+	
+	
+	To check if any server or ip is reachable or not use ping command.
+	ping 192.168.53.49
+	ping -c 5 192.168.70.20
+	
+	it will send and receive packets to check connectivity.
+	
+	What is runlevel?
+	when we restart any system it has diffrent run levels.
+	by default the run level is 5. 
+	
+	ethtool eth0 : it will give our ethernet status.
+	
+	To print all listing posts or open ports:
+	open ports - netstat -tulnp or ss -tulnp 
+	
+	listening ports - netstat -tuln or ss -tuln 
+	
+	
+	Any issue related to ssh cat /etc/ssh/ssh.conf
+	
+	sudo firewall-cmd --list-all
+	
+	Common Troubleshooting Commands
+
+            Command	                                     Purpose
+            ping <IP/domain>	                    Check connectivity.
+            traceroute <domain>	                   Trace path to a host.
+            mtr <domain>	                  Better traceroute with live updates.
+            netstat -tuln	                           Show open ports.
+            ss -tuln	                        Newer tool to show open ports.
+            curl <url>	                           Test HTTP/S connectivity.
+            dig <domain>	                          Query DNS records.
+            nslookup <domain>	                    Another way to query DNS.
+            arp -a	                           View ARP cache (local devices).
+            ip neigh	                          View neighbor devices.
+            tcpdump	                          Capture network packets (deep troubleshooting).
+            nmap	                                  Scan networks and ports.
+	
+	
+----------------------------------------What is SELinux, Managing SELINUX, Enabled, Disabled,  Permissive : EP 31---------------	
+	
+	
+	What is SELINUX?
+	- SELinux (Security-Enhanced Linux) is a security module in Linux that provides Mandatory Access Control (MAC). 
+	  It restricts programs and users to only the resources they need,
+	  based on security policies—enhancing system security beyond traditional discretionary access controls.
+	  
+	  Mode	                                  Description
+    Enforcing 	          SELinux policies are applied and enforced. Unauthorized access is blocked.
+    Permissive	          Policies are not enforced, but violations are logged. Useful for troubleshooting.
+    Disabled	              SELinux is turned off entirely. No policies are enforced or logged.
+	
+	
+	Important configration files for SELinux:
+	 /etc/selinux/config
+	 /etc/sysconf/selinux
+	 
+	 
+	 Useful SELinux Commands
+
+             Command	     Description
+            sestatus	    Shows current SELinux status
+            getenforce	    Shows current mode
+           setenforce 0/1   Set mode to permissive/enforcing
+             chcon	        Change SELinux context on a file
+           restorecon	    Restore default SELinux context
+              semanage	    Manage SELinux policy (add ports, file contexts)
+			  
+		To List files or directories in selinux context we use - ls -z
+        
+        To grep for any services with selinux context use : ps -efz | grep httpd 	
+
+        To change selinux context of a file :  chcon -t pubilc_content_t file.txt
+		
+		To change the context to default : restorecon -v file.txt
+		
+		To change mode permisive or enforcing: setenforce 0(permissive) / setenforce 1(enforcing)
+		
+		To Get boolen values: getbool -a | grep ftp and To set we have to give setbool line <on/off>
+		
+------------------------------Linux/Unix Booting Process, BIOS, MBR, GRUB, KERNEL, INIT, RUNLEVEL : EP 32--------------------------------------------
+
+ 		
+ 		
+	   *BIOS : Basic input/output system.
+	   *MBR : Master boot Recorder.
+	   *GRUB : Grand unified Boot loader.
+	   *Kernel 
+	   *init
+	   *Runlevel
+	   
+	   Detailed Linux Boot Process:-
+	   
+	   1. Power BIOS / UEFI
+          Action: When the system is powered on, the BIOS (or UEFI) performs the POST (Power-On Self Test).
+
+          Checks: CPU, memory, keyboard, disk.
+
+          Then: BIOS looks for a bootable device (like a hard disk, USB, or CD).
+		  
+		  
+	   2. MBR (Master Boot Record) 
+          
+		  MBR:
+            First 512 bytes of the bootable disk. 
+			   It divided into three part - PRIMARY boot loader - 446 bytes. it has primary boot loader infomation
+			                                Partition table info - 64 bytes.
+											MBR Validation checks - 2 bytes.
+
+            Contains bootloader (GRUB stage 1) and partition table.
+			
+            Action: Transfers control to bootloader (like GRUB). 
+		  
+	   
+	   3️. GRUB (GRand Unified Bootloader)
+         
+		  Stage 1: Loaded by MBR.
+
+          Stage 2: Loads configuration from /boot/grub2/grub.cfg.
+
+          Menu: Shows a boot menu (if configured), allows kernel selection.
+
+          Then: Loads the selected Linux kernel and initrd/initramfs into memory.
+
+	  
+	   4. Kernel Initialization
+         
+		  Kernel is loaded into memory.
+
+          Responsibilities:
+
+           Initializes hardware drivers.
+
+           Mounts the root filesystem (read-only at first).
+
+           Starts initrd or initramfs to prepare the real root FS.
+
+           Then: Executes the first user-space process → init (or systemd in modern systems).		
+		   
+		   
+		  question: Which is the last program excuted by your linux operating system while boot process?
+          answer:  it is the /etc/rc.d/init.d and it has pid 1.
+		  
+		  initrd= initial ram disk.
+		  
+		  initrd is used by the system as a temporary mount point before the kernal is booted and the real filesystem is mounted.
+		  
+	  
+	  5. init / systemd
+	   
+          PID 1: First process started by the kernel.
+
+          Old Systems: Used init (SysV).
+
+          Modern Systems: Use systemd, which uses targets instead of runlevels.
+
+          Action: Reads configuration (e.g., /etc/systemd/system/default.target) and starts services.
+		  
+	
+ 	  6. Runlevels / systemd Targets
+         Runlevel (SysV):
+
+         0 – Halt
+
+	     1 – Single-user mode
+
+	     3 – Multi-user mode (text)
+
+	     5 – Multi-user mode (GUI)
+
+         6 – Reboot
+
+      
+	  systemd Targets:
+
+      poweroff.target, rescue.target, multi-user.target, graphical.target, reboot.target, etc.
+
+      Then: Services and login prompt (TTY or GUI) start. 	  
+	  
+	  
+	  chkconfig --list :  its shows the runlevel of different process.
+	  
+	  /etc/init/inittab : it contains system run level.
+	  
+	  if we are in runlevel 3 and want to set runlevel 5 : startx (temporary) 
+	  for permanent we can do it by editing /etc/init/inittab file to 5
+	  
+	  
+	  Question: if we forgot root password. What steps need to perform?
+	  
+	   1. Reboot the system
+	       - At the GRUB menu, press e to edit the kernel command line.
+		  
+	   2. Modify the GRUB boot entry
+	      - Find the line starting with linux16 or linux (depending on BIOS/UEFI).
+
+          - rd.break
+		 
+		  - This will break the boot process and drop you into initramfs emergency shell.
+		 
+	   3. Mount the root filesystem as read-write
+          - mount -o remount,rw /sysroot	 
+		
+	   4. Access the real root filesystem
+	      - chroot /sysroot
+		 
+	   5. Reset the root password
+          - passwd
+      
+       6. Relabel SELinux contexts
+          - touch /.autorelabel
+
+       7.  Exit and reboot
+           - exit 	  
+		   
+		   
+		 who -r : To check the runlevel  
+		 
+		 uname -r : kernal version
+		 
+		 uname -a : To all information.
+		 
+		 cat /etc/redhat-release : os infomation
+		 
+		 
+----------------------Linux/Unix Remote Administration, Linux ssh authentication, generate ssh-keygen : EP 35---------------------------------------
+
+
+
+
+     What is SSH?
+     SSH (Secure Shell) is a network protocol that allows secure remote login and other secure network services over an unsecured network.
+     
+     
+     Service or demone used for ssh - sshd 
+     configuration file for ssh- /etc/ssh/sshd_config
+     
+     
+     How to login without password?
+     
+     step 1: Generate a key pair - ssh-keygen
+     
+     step 2: Copy the public key to the server: - ssh-copy-id path-to-copy user@hostname
+     
+      
+ 
+ 
+ 
+ -----------------------------Linux/Unix Remote Administration //ssh authentication //generate ssh-keygen// scp and rsync // EP 37------------------
+ 
+ 
+  What is RSYNC command?
+  - rsync is a powerful command-line utility for synchronizing files and directories between two locations, 
+    either on the same machine or across a network. It's widely used for backups, mirroring, and general file transfers 
+	because it's fast, efficient, and only transfers differences between source and destination.
+	
+	differences between rsync and scp ?
+	- When we copy any directories or file scp copy every time from start and everything but rsync only copy which is left behind.
+	  or newly updated files. this speed up the transfer process.
+	  
+	  Command:  rsync -rv -e ssh <source_file/directory> <destination ip:destination_directory>
+	  
+ 
+  what is scp?
+  - scp (Secure Copy) is a command-line tool used to securely transfer files between hosts on a network using SSH (Secure Shell). 
+    It's simple and widely used for quick file copy operations over secure connections  
+	
+	
+	Copy from local to remote: scp file.txt user@remote:/path/to/destination/
+	
+	Copy from remote to local: scp user@remote:/path/to/file.txt /local/path/
+	
+	      
+
+                              Feature	             scp	                             rsync
+                              Protocol	             SSH	                         SSH (or local)
+                              File Transfer     	Full file	              Only changes (deltas)
+                              Resume Support        Not supported	                   Supported
+                             Speed Efficiency	    Slower for large files	      Faster with delta transfer
+
+
+	
+	  
+
+----------------------------------------Linux/Unix user Security SUDO Command, Linux Sudoers File, Switch to Superuser : EP 38----------------------
+
+
+
+
+  	  Enhanced user security with sudo 
+	  
+	  SUDO : 
+	   1. Advantage of using sudo.
+	   2. /etc/sudoers file.
+	   3. allow a normal user privilge like root.
+	   4. allow a group all privilage like root.
+	   5. allow all the normal user to run all the command without prompting password.
+	   6. restrict normal user to run only 2 root commands.
+	   7. Allow a group to run only network related commands.
+	   
+	   Do not edit /etc/suddoers file always use visudo to edit.
+	   it restrict 2 users to edit same time.
+	   we can strict the use of sudo commands like network guy can only run network related sudo command and storage guy can run storage related.
+	   
+	   all command excuted by sudo users stored in /var/log/secure
+	   
+	   we use "which" to find command path: which cd 
+	   
+	   TO allow normal user privilage like root or all above steps:
+	   
+	   1. visudo 
+	   2. edit file with required details and use the command as a sudo users.
+	   
+	   
+	   
+--------------------------------------Linux package management with YUM and RPM : EP 40 ------------------------------------------------------------
+
+ 	   
+	   Software package management
+	   
+	   To manage the software in linux, two utilities are used.
+	   
+	   RPM: REDHAT PACKAGE Manager
+	   
+	   YUM: YELLOWDOG UPDATER MODIFIER
+	   
+	   
+	   RPM is a powerful software management tool for installing, uninstalling, verifing, querying and updating software packages.
+	   
+	   Real-time command:
+	   
+	   rpm -qa : To check all the installed packages in the system.
+	   rpm -qa vsftpd : To check a particuler package is installed or not.
+	   rpm -qa --test : To check a package is consistent or not.
+	   rpm -ivh : To install a package.
+       rpm -e : To remove a package or unstalled the package.
+       rpm -qip : To see infomation about the packages.
+       rpm qi : To see infomation about the installed packages.	
+       rpm -qlc : To see the configration files	of the installed packages.
+       rpm -ivh --nodeps : 	To install a package without installing dependencies.
+       rpm -Uvh : To update a particular package.	   
+	  
+	  
+	  
+	  YUM is a powerful software management tool for installing, uninstalling, verifing, querying and updating software packages.
+	  
+	  Make sure to use yum we have to install vsftpd package. 
+	  
+	  Real-time YUM command:
+	  
+	  yum list : To list the avilable packages.
+	  yum list installed : To list the installed packages in system.
+	  yum list installed <package name> : To check particuler package installed or not.
+	  yum install <package name> : To install package.
+	  yum remove <package> : To remove a package.
+	  yum update : To update
+	  
+	  
+	  
+	  
+   differences between rpm and yup?
+   yum resolve dependencies.    
+   
+   
+   
+---------------------Linux Backup And Restore Using TAR AND GZIP Command, Backup And Compress a File in Linux : EP 43 ----------------------------
+
+   backup we take to recover our server if server crash or attacked by virus.
+   
+   We use TAR command to take backup.
+   
+   gzip command to compress the original files. and take backup
+   
+   
+   
+       file1.txt -----> tar -cvf file1.txt ---> file1.txt.tar -----> gzip file1.txt.tar ---> file1.txt.tar.gz
+	   200MB                                     190 MB                                       20 MB 
+	   
+	   file1.txt.tar.gz -----> gunzip file1.txt.tar.gz ----> file1.txt.tar ---> tar -xvf file1.txt.tar ----> file1.txt
+	       20 MB                                                  190MB                                         200MB  
+		   
+		   
+		   
+		   Commands: 
+		   gzip <file name> : to compress file.
+		   gunzip <file name> : extract file.
+		   tar -cvf <file name> : create backup of file.
+		   tar -xvf <file name> : To restore the original file.
+		   
+		   
+---------------------------------Linux/Unix Basic SERVICES What is CHKCONFIG and SERVICES : EP 44---------------------------------------------------
+
+
+
+      What is daaemons?
+    => A daemon is a program that runs silently in the background, doing tasks without needing direct user input.	
+
+      For example:
+
+		sshd daemon handles SSH connections.
+
+		httpd daemon handles web server requests.
+
+		crond daemon runs scheduled tasks (cron jobs).	
+		
+		
+	  What is services?
+		In Linux, a service is basically a program (often a daemon) that runs in the background to perform specific tasks for the system or users.
+
+		Think of it like this:
+
+		Daemon = the program running quietly in the background.
+
+		Service = the managed version of that program, controlled by Linux (started, stopped, restarted, etc.).
+
+		For example:
+
+			The SSH service lets you connect remotely (sshd daemon is running in the background).
+
+			The Cron service schedules and runs tasks automatically (crond daemon).
+
+			Linux uses a service manager (like systemd, service, or init.d) to control these services.
+			
+			
+			
+	   There is two commands which controls the services:-
+		1. chkconfig
+		2. services
+		
+		1. chkconfig : is use to set start or stop or check daemon services with start and stop of server. or use to set runlevels.
+		
+		   i.e chkconfig --list 
+		       chkconfig --list httpd
+			   chkconfig <services name> off
+			   chkconfig <service name> on 
+			   chkconfig --level 12345 vsftpd off ( it will turn off all the services at different run levels)
+			   
+		       
+		2. services : is used for start, stop, reload, restart, status.
+		
+		   i.e service <service name> start
+		       service <service name> stop
+			   service <service name> reload
+			   service <service name> status
+			   service <service name> restart
+			   
+			   
+------------------------------Linux Processes | System or daemon Process | Interactive Process |Automatic or batch Process|Part1---------------------
+
+
+  What is processes?
+  => In Linux (and in general), a process is just a running instance of a program.
+
+		👉 Example:
+			When you open a text editor like gedit or run a command like ls, Linux creates a process for it.
+
+			Each process has:
+
+			PID (Process ID) — a unique number to identify it.
+
+			State — running, sleeping, stopped, etc.
+
+			Parent process — the process that started it (called PPID).
+
+			Resources — like memory, CPU, and files it is using.
+			
+			
+	  There are three types of process:-
+       1. interactive process.
+	   2. system or daemon process.
+	   3. Automatic process.
+	   
+	   1. Interactive Process
+	   
+          Started by a user manually (through terminal or GUI).
+          
+          Runs in foreground or background.
+          
+          Needs user interaction or starts because the user asked for it.
+          
+          Examples:
+          
+          Running firefox, nano, ls, vim, etc.
+          
+          Opening a file browser window.
+          
+          Interactive = User-controlled.
+          
+       2. System or Daemon Process
+	   
+          Started by the system during boot or automatically when needed.
+          
+          Runs in background without user interaction.
+          
+          Keeps running to provide services.
+          
+          Examples:
+          
+          sshd (handles SSH connections)
+          
+          crond (runs scheduled tasks)
+          
+          systemd (manages system startup)
+          
+          Daemon = Background helper service.
+          
+       3. Automatic Process
+	   
+          Started automatically when an event occurs or on a schedule.
+          
+          User doesn’t manually start it each time.
+          
+          Often related to scheduled jobs (like cron) or event-driven actions.
+          
+          Examples:
+          
+          A backup script running every night at 2 AM via cron.
+          
+          udev daemon starting a process when a USB device is plugged in.
+          
+           Automatic = Event or time triggered.
+		   
+		   
+		 commands:
+          ps -a : To see all process running.
+          ps -ef : To see all running process.
+          ps -u : To see all the process by logged in user.
+          ps -aux : To see all process running or stopped.
+          ps -ef | grep <process name > : To see the process is running or not.
+
+   
+   In process we have 64 signals but 4 are important and asked in interviews.
+   
+     To list all signals use:   kill --list
+	 
+	 1. SIGUP
+	    kill -1 <pid> : It will reload the process or kill the existing process and create new process.
+		
+		
+	 2. SIGKILL 
+	    kill -9 <pid> : It will kill the process forcefully.
+		
+		
+		note: Never user kill -9 for any services or any process without proper guidance it is not recommanded.
+		
+	3. SIGSTOP
+       kill -20 <pid> : It will stop the process. 	
+   
+  
+  
+  
+    
+    1. SIGUP (Signal Hang UP) — Signal 1
+	
+		Sent when a terminal is closed or disconnected.
+  
+		Many daemons use it to reload configuration without restarting.
+  
+		Example usage:
+  
+		bash
+		Copy
+		Edit
+		kill -SIGHUP <PID>
+		
+		
+	2. SIGINT (Signal Interrupt) — Signal 2
+ 
+		Sent when a user presses Ctrl + C.
+  
+		Tells the process: "Stop what you are doing."
+  
+		Example:
+  
+		Running ping google.com and pressing Ctrl + C sends SIGINT to stop ping.
+  
+	
+	3. SIGKILL (Signal Kill) — Signal 9
+		
+		Forcefully kills a process.
+  
+		The process cannot ignore it, cannot clean up — it just dies immediately.
+  
+		Example usage:
+  
+		bash
+		Copy
+		Edit
+		kill -9 <PID>
+    	SIGKILL is a brutal shutdown.
+  
+ 
+	4. SIGTERM (Signal Terminate) — Signal 15
+		
+		Politely requests a process to terminate.
+  
+		Gives process a chance to clean up before exiting.
+		
+		
+
+ ===============Linux Processes | System or daemon Process | Interactive Process |Automatic or batch Process|Part4================================
+   
+   
+   We can set priority of a process by default priority is zero. 
+   
+   
+   niceness : value (-20 to 19)
+   
+   more lower the number more is the priority. high number less priority.
+   We use Nice and renice command to set a value.
+   
+   To set a value of a process before excuting we use nice command.
+     
+   
+   
+   Two important terms here:
+
+	Priority: How "important" a process is (lower number = more important).
+
+	Nice value (niceness): A user-space way to adjust priority.
+	
+	
+	
+	command :
+	  nice -n -20 ssh 
+	  nice -n 10 sleep 1000
+	  nice -n -10 cat > file1.txt
+	  renice -n 20 <pid>
+	  
+	  
+	  Concept	                  Range	                      Meaning	                                             Command
+	Nice value	                 -20 to +19	           Higher nice = lower priority	                             nice, renice
+  Real-time priority	          1 to 99	            Higher number = higher priority	                       chrt, taskset, etc.
+
+
+
+   top command is a real-time task manager for Linux.
+
+	It shows:
+
+		Which processes are running
+
+		CPU and memory usage
+
+		Process IDs (PIDs)
+
+		User who started the process
+
+		Process priority and nice value
+
+		How much CPU and RAM each process uses
+ 
+ 
+----------------------------------What is FTP | FTP Server and Client Configuration | FTP Commands | File Transfer Protocol | Part 1----------------
+
+    FTP (File Transfer Protocol) is a standard network protocol used to transfer files between a client and a server over a TCP/IP network, 
+	such as the Internet or an intranet.
+	
+	Key Features of FTP:
+		Client-Server Architecture
+
+		FTP operates on a client-server model, where the FTP client initiates the connection and the FTP server responds.
+
+		Separate Control and Data Channels
+
+		Port 21 is used for the control connection (commands and responses).
+
+		Port 20 (or a dynamic port) is used for the data connection (file transfer).
+
+		Authentication
+
+		FTP supports username and password authentication.
+
+		Some servers allow anonymous access, where users log in with the username anonymous.
+
+		Active vs. Passive Mode
+
+		Active Mode: Server initiates the data connection to the client.
+
+		Passive Mode: Client initiates both control and data connections (more firewall/NAT-friendly).
+		
+		
+		Profile of FTP Server:
+		
+		1. USE : It is used for uploading and downloading a file.
+		2. DISADVANTAGE: directories can not be uploaded and downloaded.
+		3. package: vsftpd
+		4. Daemon : vsftpd (very secure file transfer protocol daemon)
+		5. Script: /rtc/inid/vsftpd
+		6. port - 20 and 21.
+		7. Configuration file : /etc/vsftpd/vsftpd.conf
+		                        /etc/vsftpd/iser_list
+								/etc/vsftpd/ftpuser
+								/etc/pam.d/vsftpd
+		8. Document root : /var/ftp
+           Home directory 		
+								
+								
+		 Basic troubleshooting before configuring FTP Server.
+
+         1. ping server 
+
+         2. Need to resolve ip to host and host to ip.
+            edit /etc/hosts		 enter ip and hostname.
+			
+		 3. check the firewall rules.
+		    first check systemctl status iptables
+			if running start firewall by running.
+			 systemctl stop iptables
+			again check status if it is still running 
+             may be it is because of run levels
+             chkconf --list iptables
+             To off we have to use command.
+             chkconfig --levels 123456 iptables off
+
+ 		 4.	Now install by running command
+		 
+		     yup install vsftpd 
+			 
+			 once installed check service status 
+			   systemctl status vsftpd
+			   
+---------------------Linux NFS (Network File System )| How to share files and directory between two linux server| Part 1-----------------
+
+
+-------------------------------------------------Some Basic commands-----------------------------------------------------------
+
+🔍 Main Differences Between curl and wget
+Feature	                                       curl	                                                           wget
+Purpose	                  Designed for data transfer (client-side URL requests, APIs, etc.)	     Designed for downloading files from the web
+Protocol Support	                HTTP, HTTPS, FTP, FTPS, SCP, SFTP, LDAP, etc.	             HTTP, HTTPS, FTP (limited compared to curl)
+Output	                              Outputs to stdout by default	                             Saves files directly to disk by default
+
+
+
+
+      awk -F" " '{print $1}' 
+	  
+	  
+	  set -x # Enable debbugging
+
+      set -e #Exit on error
+
+      set -o pipefail # Exit on error in a pipeline 
+	  
+	  
+	  learn about Trap
+	  
+	  
+---------------------------------------------------shell-scripting-interview-question---------------------------------------------------------------
+
+   1. List some of the commonly used shell command?
+
+      ans:  cp, ls, pwd, date, grep, mkdir, vi, find, df, top, free mv.
+	
+   2. Write a simple script to list process?
+	
+	  #!/bin/bash
+	
+	  ps -ef | grep 122 | awk -F" " '{print $2} 
+	  
+   3. Write a script to print only errors from remote log.
+
+     #!/bin/bash
+     
+      curl <link>| grep -i error	
+
+   4.  write a shell script to print numbers divided by 3, 5 and not 15.
+
+    #!/bin/bash
+     
+
+    #################################
+    # Nmae : Ravi sahu
+    # Date: 15-06-2025
+	# Description: finding the range of number which are divisible by 3, 5 but not divisible by 15.
+	###################################
+
+	
+	  
+	  for i in [1...100]; do
+	  if ([ 'expr $i % 3' ] || [ 'expr $i % 5' ]) && [ 'expr $i % 5' ];
+	  then 
+	               echo $i
+	fi;
+	done
+	
+	
+   5. Write a script to print number of S in mississipee?
+      
+	   #!/bin/bash
+	   
+	    x=mississipee
+		
+		grep -o "s" >>> "$x" | wc -l
+  
+  
+   6. How would you debug the shell script?
+   
+     solution: while writing script start with 
+	 
+	 #1/bin/bash
+	 
+	 set -x   #debug mode
+	 set -e
+	 set -o pipefail
+     
+  
+  
+   7. what is crontab in linux?
+      
+	  crontab we use to sheduled a task. 
+	  
+   8. How to open a file in read me mode?
+     
+	 vim -r file1.txt
+	 
+   9. What is difference between break and continue statement?
+   
+      Break : means breaking excution 
+	  
+	  continue: skip this move it to next line.
+	  
+  10. Disadvantages of shell script?
+  
+      every time a shell command is excuted a new process start running.
+	  
+	  
+
+  11. What are different kinds of loop?
+
+     for, while, do while , untill.
+	 
+	 
+  12. Is bash is dynamically or static type?
+     
+     bash is dynamic in nature.
+
+  
+   13. what are the different types of networking command you used?
+   
+      traceroute, netstate, ss, ping, curl, wget   
+	  
+	  
+  14. How do you sort list of name in a file?
+  
+     by using sort command .
+	 
+  15. how would you manage the logs of a system that generate large number of log file daily?
+
+    by using log rotate
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Networking Fundamentals:
+
+Learn : 
+ 1. IP Address and Types of ip address?
+ 2. Subnet and VPC
+ 3. CIDR
+ 4. ports
+
+-----------------------------------------------------------------------------------------------------------------------
+
+ GIT AND GIT HUB
+
+ 
+   
+      
+
+    	

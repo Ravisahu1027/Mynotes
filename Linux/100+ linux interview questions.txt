@@ -1,0 +1,117 @@
+  
+  
+  
+  1. How to set username and password never expire?
+  
+  - . chage <username>
+    . set password expire = -1
+    
+    or 
+	
+	chage -m -1 <username>
+
+	
+  2. why /etc/passwd and /etc/shadow file cannot merge into 1 file?
+  
+ 
+  -  It is due to security reasons as sometimes applications and program needs user list access and it will be easy for attackers to 
+     attack and take access and sensitive informations.
+	 
+	 They can't be merged into one file because doing so would either expose sensitive information or
+	 require all programs to run with elevated privileges to access that one file, 
+	 creating a major security risk.
+	 
+	 
+  3. To list All the files opened by particuler PID?
+   
+  -  lsof -p <PID>
+  
+
+  4. We are unable to unmount the file system? What are the reason behind it?
+  
+  - .Files or Directories Are in Use
+      lsof <partition name>
+	   
+	. Shell or Terminal Is in That Directory
+       Come out and try to unmount again
+	   
+	. check the user:
+        fuser -cu <partition name>
+	  kill the user or ask user to save and leave the directory.
+	    fuser -ck <partition name>   
+	   
+  5. What could be the reason is server take more time after reboot?
+   
+  -  filesystem got corrupt and its ext2, ext3 does not have journaling features. 
+  
+  
+  6. We are trying to create the file under any partition but getting permission denied error. What could be the reason?
+     However there is no space and no permission issue?
+	 
+  -  running out of inode
+     sometimes df command shows we have enough free disk space but claims filesystem is full.
+     we need to check inode using following command.
+     df -i <disk partition>
+     
+        - find . -inum <inode number> -exec ls -il {} \;  to find ( . mean present working directory)
+        - find . -inum <inode number> -exec rm -i {} \;  to remove 	 
+		
+    delete or move large file to other server which are not in use.
+
+
+ 7.	How to check kernal routing information table?
+ 
+ - There are three commands to check:
+
+   a. route -n
+   b. netstat -rn
+   c. ip route   
+
+
+ 8. How to set sticky bit and what is the difference b/w small s and capital S?
+ 
+ - The sticky bit is a special permission applied on file and directory. then only root and owner of the file can delete or rename.
+   Even if other user having full permission.
+   
+   To set sticky bit 
+    chmod 1777 /shared/folder
+	
+	 Owner: read/write/execute
+
+     Group: read/write/execute
+
+     Others: read/write/execute
+
+     Sticky bit is set
+	
+  or 
+  
+   chmod +t <file name>
+   
+                          Symbol	Meaning
+                          s	      SetUID/SetGID is set and executable
+                          S	      SetUID/SetGID is set but not executable (⚠️ likely a misconfiguration)
+   
+  
+  9. which file is used to specify the default gateway?
+   
+   - /etc/sysconfig/network
+   
+  
+ 10. How to switch between different lrunlevels?
+
+ - by using command - init <runlevel>
+
+   or 
+   
+  edit file /etc/inittab
+
+
+ 11. What is NFS? How to configure it? what port no is does use?  
+ 
+ - Network file system NFS (Network File System) is a distributed file system protocol that allows a 
+   system to share directories and files with others over a network. 
+   It lets clients mount remote directories on their local machines and interact with them as if they were local files.
+ 
+    
+	

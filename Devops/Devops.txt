@@ -1,0 +1,78 @@
+
+
+
+
+   Protocol: Set of rule for how data is transmitted over network devices.
+   
+    Difference between TCP and UDP protocol
+	
+	
+	
+	      TCP: Transmission control protocol
+		  
+		  1. reliable protocol - ensures data is delivered, in order, with error checking and retransmission
+		  2. connection oriented
+		  3. Slower due to overhead of reliability features
+		  4. Web browsing (HTTP/HTTPS), email (SMTP), file transfers (FTP)
+		  
+		  UDP: User Datagram Protocol
+		  
+		  1. unreliable - no guarantee of delivery, order, or duplication protection
+		  2. connectionless
+		  3. Faster due to minimal overhead
+		  4. Streaming (video/audio), online gaming, VoIP
+		  
+		  
+          		  | **Protocol**   | **Port Number** | **Description**                                    |
+                  | -------------- | --------------- | -------------------------------------------------- |
+                  | **HTTP**       | 80              | Web traffic (unsecured)                            |
+                  | **HTTPS**      | 443             | Secure web traffic                                 |
+                  | **FTP**        | 21              | File Transfer Protocol (control)                   |
+                  | **SFTP**       | 22              | Secure File Transfer (uses SSH)                    |
+                  | **SSH**        | 22              | Secure shell access                                |
+                  | **Telnet**     | 23              | Remote login (insecure)                            |
+                  | **SMTP**       | 25              | Email sending                                      |
+                  | **DNS**        | 53              | Domain Name System                                 |
+                  | **DHCP**       | 67/68           | Dynamic Host Configuration Protocol                |
+                  | **POP3**       | 110             | Email receiving (Post Office Protocol)             |
+                  | **IMAP**       | 143             | Email receiving (Internet Message Access Protocol) |
+                  | **SNMP**       | 161             | Network management protocol                        |
+                  | **LDAP**       | 389             | Lightweight Directory Access Protocol              |
+                  | **RDP**        | 3389            | Remote Desktop Protocol                            |
+                  | **MySQL**      | 3306            | MySQL database                                     |
+                  | **PostgreSQL** | 5432            | PostgreSQL database                                |
+                  | **NTP**        | 123             | Network Time Protocol                              |
+                  | **TFTP**       | 69              | Trivial File Transfer Protocol                     |
+          
+		  
+		  To check connectivity between servers 
+		  
+		  edit /etc/hosts 
+		  
+		  make entry hostname and ip address and save
+		  
+		  command :  ping <ip address>
+		  
+		  or 
+		  
+		  command : traceroute <ipaddress>
+		  
+		  command : netstat -tulnp ( To check open ports)
+		  
+		  command : nmap ( scan the port of other connected server)
+		  
+		  command : dig <ipaddress> ( to check DNS resolution)
+		  
+		  command : nslookup <ipaddress> ( to check DNS resolution)
+		  
+		  command : route -n  ( To check gateways or iptable info)
+		  
+		  
+		  
+		  
+ ----------------------------------------------------------containers--------------------------------------------------------------------------
+
+   
+		  
+		  
+		  
