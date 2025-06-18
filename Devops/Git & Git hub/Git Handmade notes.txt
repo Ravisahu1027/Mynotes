@@ -119,7 +119,85 @@
   	
 	
   
+  Interview Questions:
   
+  1. Is GIT a Distributed or Centralized version control system? What is the Difference?
+     
+	Git is a Distributed Version control system. each developer has a complete copy of the codebase including history, While in a 
+	Centralized VCS, there's a single central repository.
+	
+	
+  2. What are GIT commands that you use to commit changes to your remote repository?
+   
+    git add <file>
+    git commit -m  "<message>"	
+    git push origin <branch>
+	
+	
+  3. Difference between git fetch and git push?
+
+    git fetch : Download changes from remote but doesn't apply them.
+    git push: upload your local commits to the remote repository.
+
+  4. Difference between git merge and git rebase?
   
+    Git merge : Combine branches and keeps history intect ( create a merge commit).
+  
+    Git rebase: moves commits from one branch onto another(rewrite history).
+	
+	
+  5. What are pre-commit and post-commit hooks?
+  
+    Git hooks are scripts that run at specific points in Git's lifecycle.
+       
+      Pre-commits: Runs before a commit.
+      post-commits: Runs after a commit. (e.g. sending a notifications)
+
+  6.  what is a webhook?
+      A webhooks is a way for an app (liek github) to send real-time data to another service (e.g. trigger CI/CD on push)
+
+  7. How to pull and push changes to Git?
+     git pull origin <branch>
+     git push origin <branch>
+
+   	 
+  8. what is .git and .gitignore?
+    
+     .git: Hidden folder that tracks your repo (contains Git history and config)
+  	 .gitignore: Specifies files/folders Git should not track.
+	 
+  9. How do you resolve a merge conflicts in Git?
+      a. Git will mark the conflicted files.
+      b. Open and edit to solve conflicts.
+      c. after resolving  : git add . && git commit 
+
+ 10. what is git stash and its use cases?
+    
+     git stash: Temporarily saves uncommited changes.
+	 
+	   git stash                       #saves changes
+	   git stash pop                   #apply and remove the stash
+	   
+	   use cases:  when switching branches without committing work-in-progress.
+	   
+ 11. Difference between git clone and git fork ?
+     
+     git clone: Copies a repo to your local machine.
+     
+     git fork:  copies a repo to your github account (useful for contribution)
+
+ 12. how to amend a commit in Git?
+      
+     git commit --amend 
+    
+      - used to modify the most recent commit message or file.
+
+ 13. what is cheery-pick in Git?
+ 
+     Git chery-pick <commit>: good way to merge any specific commit from other branch to another without merging the whole branch.
+     
+    	 
+	 
+    
 	 
 	 
