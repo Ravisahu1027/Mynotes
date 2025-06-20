@@ -1,0 +1,66 @@
+
+
+ CONFIGRATION_MANAGMENT - Ansible
+ 
+ What is ansible?
+ Ansible is a configration management tool. Which is used to manage server, upgrates, patching and installation made easy across servers.
+ 
+ Configration tools avilable are - Ansible, Puppet, chef, salt.
+ 
+ Why ansible?
+ 
+ answers: 
+   1. agentless architecture : Ansible uses ssh or winRM to login so we are not required to install any agents on target machine.
+   2. Uses simple language - YAML where as chef required ruby and puppet required DLS.
+   3. Module are python based for we can easy to create module or understands
+   4. Push-Based Execution.
+   5. support for windowns and linux.
+   
+                                                    Quick Comparison Table
+        Feature	         Ansible	          Puppet	              Chef	                 SaltStack
+        Language         	YAML	         DSL (Ruby)	              Ruby	                 YAML + Python
+        Agentless	      ✅ Yes	         ❌ No                 	❌ No	                 ✅ Yes (optional)
+        Ease of Setup	  ✅ Easy	         ❌ Complex	            ❌ Complex	             ✅ Moderate
+        Learning Curve	  ✅ Low	         ❌ Medium	            ❌ High	                 ✅ Moderate
+     Community & Modules  ✅ Strong	         ✅ Strong	            ✅ Good	                 ✅ Growing
+        Best for	     Simplicity, Cloud	Large-scale infra	   Complex logic	      High-speed automation
+  
+ 
+  Disadvantages:
+   1. Performance on Large Scale
+        Ansible is not optimized for large-scale parallelism out of the box.
+
+        Since it uses SSH for each task, performance may lag when managing thousands of nodes simultaneously.
+		
+		
+   2. Error Handling Can Be Limited. 
+       Diffulties in detecting changes. need to re-run playbook.
+	   
+   3. Windows Support is Improving But Not Perfect.
+
+   4. No Built-in Scheduling.
+
+
+   Key Concepts:
+     1. Inventory: List of hosts to manage.
+   
+     2. Playbook: YAML file that defines a set of tasks.
+   
+     3. Modules: Pre-written code to perform tasks (e.g., yum, copy, user, service).
+   
+     4. Tasks: Actions to be performed.
+   
+     5. Roles: Structure to organize playbooks.
+   
+     6. Facts: System info collected from target nodes.
+   
+     7. Handlers: Run only when notified (used for changes like restarting services).   
+   
+   
+   
+   Installation & Setup:
+     1. Install Ansible: sudo apt install ansible or sudo yum install ansible
+   
+     2. Inventory file (default): /etc/ansible/hosts
+   
+     3. Test connection: ansible all -m ping
