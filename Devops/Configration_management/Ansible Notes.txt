@@ -64,3 +64,36 @@
      2. Inventory file (default): /etc/ansible/hosts
    
      3. Test connection: ansible all -m ping
+	 
+	 
+	 
+	 More on inventory file:
+	 
+	1. we can add target machines on inventory files.
+	 host1
+	 host2
+	 host3
+	 
+	2.  we can group them 
+	   [webserver]
+	    host1
+	   [database server]
+	    host2
+	    [backend server]
+	    host3
+	 
+	 3. we can add alias to host name like
+	     web ansible_host=host1
+	     database ansible_host=host2
+	     backend ansible_host=host3
+		 
+		 
+     4. other parameters we can added 
+	   
+	   ansible_connections
+	   ansible_port
+	   ansible_user
+	   ansible_ssh_pass
+	   
+	   To estabilish connection between host and target use - ssh_keygen 
+	   copy public get from target machine and store in authorisation in ansible machine
