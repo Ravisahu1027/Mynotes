@@ -251,8 +251,7 @@
 	 2. Collections: A distribution format that can include roles, modules, plugins, and docs.
 	 3. Community & Certified Content: Community content is from users; certified content is supported by vendors and Red Hat.
 	 
-	 ssh-copy-id ubuntu@52.87.156.58
-	 ssh-copy-id ubuntu@44.202.152.178
+	 
 
 
 
