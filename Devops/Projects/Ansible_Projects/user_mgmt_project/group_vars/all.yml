@@ -1,0 +1,9 @@
+---
+users: 
+  - name: alice
+    ssh_key: alice_pub
+  - name: bob
+    ssh_key: bob_pub
+  - name: carol
+    ssh_key: carol_pub
+        

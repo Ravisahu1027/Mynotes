@@ -16,7 +16,7 @@
          so that hardwares can understand.
 	   
 	   
-------------------------------------------------------Filesystem hierarchy: EP 8----------------------------------------------------	 
+-----------------------------------------------------Filesystem hierarchy: EP 8----------------------------------------------------	 
  
  Root Directory(/) :- Parent directory of all directory. Under which all directories are present. 
 					  It is a home directory of root user. 

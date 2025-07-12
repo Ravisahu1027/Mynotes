@@ -1,0 +1,110 @@
+  
+  
+ What is Terraform?
+ It lets you define and provision data center infrastructure using a declarative configuration language called HCL (HashiCorp Configuration Language).
+ 
+ Key Terraform Concepts:
+ 1. Providers — Plugins to interact with APIs (e.g., AWS, Azure, GCP, Kubernetes).
+ 2. Resources — The infrastructure components you create (VMs, networks, buckets, etc.).
+ 3. Variables — Inputs you can reuse and parameterize.
+ 4. State File (terraform.tfstate) — Tracks the real-world infrastructure.
+ 5. Modules — Reusable configuration units.
+ 6. Plan → Apply → Destroy — The main workflow.
+ 
+ Basic Terraform Commands:
+ 1. terraform init → Initialize a Terraform working directory.
+ 2. terraform plan → See what changes Terraform will make.
+ 3. terraform apply → Apply the planned changes.
+ 4. terraform destroy → Tear down your infrastructure.
+ 
+ Best Practices:
+ 1. Use Version Control (Git)
+    1.1 Store all Terraform configs in a Git repo.
+	1.2 Pin provider versions in required_providers to prevent unexpected updates.
+	
+ 2. Use Remote State + State Locking.
+    2.1 Store your terraform.tfstate remotely (e.g., in an S3 bucket with DynamoDB for state locking).
+    2.2 This prevents state file conflicts in teams.
+    EXAMPLE:
+	   
+	   terraform {
+          backend "s3" {
+    bucket         = "my-terraform-state"
+    key            = "envs/prod/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "terraform-lock"
+    encrypt        = true
+                       }
+                 }
+				 
+				 
+ 3. Use Modules for Reuse and DRY Code
+    3.1 Break infra into reusable modules (VPCs, EC2s, RDS, etc.).
+    3.2 Use a modules/ folder or Terraform Registry modules.
+
+ 4. Organize Code Clearly
+    4.1 Use separate directories for environments (e.g., dev, prod).
+	4.2 Follow a clear naming convention for files: main.tf, variables.tf, outputs.tf.
+	
+ 5. Secure Secrets	
+    5.1 Don’t store secrets in plain .tf files.
+	5.2 Use tools like AWS Secrets Manager, Vault, or SOPS.
+	5.3 Never commit terraform.tfstate if you’re using local state.
+	
+ 6. Validate and Test
+    6.1 Run terraform fmt for consistent formatting.
+    6.2 Use terraform validate and terraform plan in CI pipelines.
+    6.3 Consider terratest (Go) or kitchen-terraform (Ruby) for automated infra tests.
+
+ 7. Use Workspaces for Multiple Envs (carefully!)
+    7.1 Use workspaces or separate state files to manage dev, staging, prod.
+    7.2 Example: terraform workspace new staging
+
+--------------------------------------------------------------------------------------------------------------------------
+
+ ADVANCE_TOPIC:
+
+  1. Remote Backends & Collaboration
+     1. Use backends like S3, GCS, or Terraform Cloud.
+      
+     2. Enable state locking (e.g., DynamoDB for S3 backend).
+     
+     3. Use terraform import to bring existing infra under Terraform. 
+	 
+  
+  2. Dynamic Blocks & Count/For_Each
+
+     1. Use count or for_each for resource loops.
+     2. Use dynamic blocks for nested repeatable configs.
+	    
+		EXAMPLE:
+		  resource "aws_security_group_rule" "allow_ports" {
+                    for_each = var.ports
+                  
+                    type              = "ingress"
+                    from_port         = each.value
+                    to_port           = each.value
+                    protocol          = "tcp"
+                    security_group_id = aws_security_group.sg.id
+                  }
+
+
+  3. CI/CD for Terraform
+     1. Automate plan & apply with pipelines (GitHub Actions, GitLab CI, Jenkins).
+     2. Example: PR triggers terraform plan, only merge allows apply.
+
+  4. Use Sentinel or Policy as Code
+     1. Use Sentinel (in Terraform Cloud/Enterprise) for compliance rules.
+     2. Example: Prevent public S3 buckets or open security groups.
+
+  5. State Management
+     1. Use terraform state commands to inspect, move, or remove resources.
+     2. Practice state file recovery: always version your backend storage.
+
+  6. Terraform Cloud & Terraform Enterprise	 
+     1. Use Terraform Cloud for remote runs, VCS integrations, workspaces, Sentinel.
+	 2. Use private module registries for your org.
+	 
+	 
+	
+    	

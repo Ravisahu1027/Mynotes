@@ -1,0 +1,262 @@
+
+
+ What is kubernatees?
+ kubernetes is an open-source container orchestration engine designed for automating the 
+ deployment, scaling, and management of containerized applications. This open-source project is 
+ hosted by the Cloud Native Computing Foundation (CNCF). 
+ 
+ Why do we need Kubernetes? 
+ After Docker came into the Picture, the deployment of the applications was very easy on the 
+ containers because containers are lightweight. But after some time, there were a lot of issues 
+ arose such as managing the huge amount of containers in the Production environment where 
+ Containers failed leading to huge Business losses. 
+ 
+ After Kubernetes came, it automates many tasks such as: 
+ ●  Autoscaling of Containers according to the peak or normal hours. 
+ ●  Load balancing of multiple containers. 
+ ●  Automatically deployment of containers to the available nodes in the cluster. 
+ ●  Self-healing if containers fail. 
+ 
+ Features of Kubernetes:
+ ●  AutoScaling  : Kubernetes supports two types of autoscaling  horizontal and vertical 
+    scaling for large-scale production environments which helps to reduce the downtime of 
+    the applications. 
+ ●  Auto Healing  : Kubernetes supports auto healing which  means if the containers fail or 
+    are stopped due to any issues, with the help of Kubernetes components(which will talk in 
+    upcoming days), containers will automatically repaired or heal and run again properly. 
+ ●  Load Balancing  : With the help of load balancing, Kubernetes  distributes the traffic 
+    between two or more containers. 
+ ●  Platform Independent  : Kubernetes can work on any type  of infrastructure whether it’s 
+    On-premises, Virtual Machines, or any Cloud. 
+ ●  Fault Tolerance  : Kubernetes helps to notify nodes  or pods failures and create new pods 
+    or containers as soon as possible 
+ ●  Rollback  : You can switch to the previous version. 
+ ●  Health Monitoring of Containers  : Regularly check the  health of the monitor and if any 
+    container fails, create a new container. 
+	
+	
+	
+	Master-Slave/ Client-Server Architecture in Kubernetes:
+	
+	Kubernetes follows client-server architecture where the Master Node and Worker node 
+    exist which constitutes a ‘Kubernetes Cluster’. We can have multiple worker nodes and 
+    Master nodes according to the requirement.
+	
+	Master Node/Control plane:
+	The control plane components, including the API server, etcd, scheduler, and controller 
+    manager, are typically found on the master node(s) of a Kubernetes cluster. These 
+    components are responsible for managing and controlling the cluster as a whole.
+
+    The master node is responsible for the entire Kubernetes cluster and manages all the 
+    activities inside the cluster in which master nodes communicate with the worker node to 
+    run the applications on the containers smoothly. Master Node has four primary 
+    components which help to manage all the things that we have discussed earlier: 	
+	
+	1.  API Server:            In Simple terms, after installing the  kubectl on the master node 
+                               developers run the commands to create pods. So, the command will go to the 
+                               API Server, and then, the API Server forwards it to that component which will 
+                               help to create the pods. In other words, the API Server is an entry point for 
+                               any Kubernetes task where the API Server follows the hierarchical approach 
+                               to implement the things.
+					           
+    2. ETCD:                   Etcd is like a database that stores all the  pieces of information of the 
+                               Master node and Worker node(entire cluster) such as Pods IP, Nodes, 
+                               networking configs, etc. Etcd stored data in key-value pair. The data comes 
+                               from the API Server to store in etc. 	
+
+    3. Controller Manager:	   The controller Manager collects  the data/information 
+                               from the API Server of the Kubernetes cluster like the desired state of the 
+                               cluster and then decides what to do by sending the instructions to the API 
+                               Server.				  
+                               
+	4. Scheduler:              Once the API Server gathers the information  from the Controller 
+                               Manager, the API Server notifies the Scheduler to perform the respective task 
+                               such as increasing the number of pods, etc. After getting notified, the 
+                               Scheduler takes action on the provided work.	
+
+   
+
+ Worker Node: 
+ The Worker Node is the mediator who manages and takes care of the containers and 
+ communicates with the Master Node which gives the instructions to assign the resources to the 
+ containers scheduled. A Kubernetes cluster can have multiple worker nodes to scale resources 
+ as needed. 
+  
+ The Worker Node contains four components that help to manage containers and communicate 
+ with the Master Node:  
+ 
+ 1. Kubelet:          kubelet is the primary component of the Worker  Node which manages the 
+                      Pods and regularly checks whether the pod is running or not. If pods are not working 
+                      properly, then kubelet creates a new pod and replaces it with the previous one because 
+                      the failed pod can’t be restarted hence, the IP of the pod might be changed. Also, 
+                      kubelet gets the details related to pods from the API Server which exists on the Master 
+                      Node.
+			 
+ 2. Kube-proxy:       kube-proxy contains all the network configuration  of the entire cluster such 
+                      as pod IP, etc. Kube-proxy takes care of the load balancing and routing which comes 
+                      under networking configuration. Kube-proxy gets the information about pods from the 
+                      API Server which exists on Master Node.
+				      
+ 3. Pods:             A pod is a very small unit that contains a container or multiple containers where 
+                      the application is deployed. Pod has a Public or Private IP range that distributes the 
+                      proper IP to the containers. It’s good to have one container under each pod.
+
+ 4. Container Engine: To provide the runtime environment  to the container, Container 
+                      Engine is used. In Kubernetes, the Container engine directly interacts with container 
+                      runtime which is responsible for creating and managing the containers. There are a lot of 
+                      Container engines present in the market such as CRI-O, containerd, rkt(rocket), etc. But 
+                      Docker is one of the most used and trusted Container Engine. So, we will use that in our 
+                      upcoming day while setting up the Kubernetes cluster.	
+
+
+ 
+ What are the different Types of Kubernetes Distributions? What Distributions our organisation uses?
+ A Kubernetes distribution is a packaged version of upstream Kubernetes, often bundled with:
+   1. Tools for installation, upgrades, and lifecycle management.
+   2. Opinionated configurations (security, networking, storage).
+   3. Vendor-specific support.
+   4. Extra features for enterprise needs (RBAC, policy enforcement, observability, multi-tenancy, etc.).
+   
+ Why use a distribution?
+   1. Running raw upstream Kubernetes can be complex — distros make it production-ready.   
+   2. Adds tested integrations for networking, storage, logging, monitoring.   
+   3. Provides compliance/security hardening.
+   4. Offers commercial support and SLAs.
+                 							   
+     
+	
+    	Popular Kubernetes distributions for corporates:
+		
+		
+		Please refer picture in folder - K8s_Distribution
+		
+		
+ How do organizations choose a distro?
+  🔑 Key factors for corporates:
+     
+     On-prem vs. cloud vs. hybrid — Do you want fully managed (EKS/AKS/GKE) or self-managed (OpenShift/Rancher)?
+     
+     Compliance/security — Do you need FIPS, FedRAMP, or other certifications?
+     
+     Integration — Does it integrate with your IAM (LDAP/AD), network policies, storage?
+     
+     Support — 24x7 support, SLAs, certified engineers?
+     
+     Multi-cluster/multi-tenant — Do you need to run many clusters across regions/clouds?
+     
+     Dev experience — Do dev teams want built-in CI/CD or developer portals?
+     
+
+  ✅ Examples
+  📌 Example 1: A large bank might pick Red Hat OpenShift for its baked-in security, certified operators, and multi-cluster control.
+  
+  📌 Example 2: A SaaS company fully on AWS might use EKS, to offload control plane management and integrate with other AWS services.
+  
+  📌 Example 3: An organization with many vSphere workloads might adopt VMware Tanzu, for tight integration with existing VMware tools.
+  
+  
+    My First pod yaml:
+	
+                                                apiVersion: v1
+                                                kind: Pod
+                                                metadata:
+                                                  name: my-first-pod
+                                               	labels:
+                                               	  app: v1
+                                                spec:
+                                                  containers:
+                                               	  - name: nginx
+                                               	    image: nginx:latest
+                                               		
+                                               		
+ Command for pods:
+ 
+    Deploy the Pod:
+	 kubectl apply -f my_first_pod
+	 
+	List Pods:
+     kubectl get pods
+	 
+    Check Logs: 
+     kubectl logs -f <pod_name>
+	 
+    To check the logs of the primary container:
+     kubectl logs -f <pod_name> -c <container_name>
+	 
+	To check the logs of the second container:
+     kubectl logs -f <pod_name> -c <container2_name>
+	 
+	Delete the Pod: 
+     kubectl delete pod <pod_name>
+
+    To list the IP of the pod:
+     kubectl pod <pod_name> -c <container_name> --hostname -i 	
+	 
+	To delete the pod by specifying the manifest file name:
+     kubectl delete -f my_first_pod.yml
+
+
+ Deployment files:
+
+  ●  Purpose  : Deployment files contain all information  about the application and define how 
+                he application or microservices will be deployed on the Kubernetes cluster. In 
+                eployment files, we can define the desired state, pod replicas, update strategies, and 
+                od templates. 
+ 
+ ●  Contents  : Deployment files define the desired state  of a deployment, pod replicas, 
+                container images, and resource limits. 
+ 
+ ●  Usage  : Deployment files are mainly used by developers  and administrators to manage 
+             the application lifecycle within Kubernetes. They enable declarative application 
+             management, scaling, and rolling updates.
+
+ my_first_deployment.yml
+
+ apiVersion: v1
+ kind: Deployment
+ metadata:
+   name: my_deployment
+   labels:
+     apps: v1
+ spec:
+   replicas: 2
+   selector:
+     matchLabels:
+       apps: v1
+    template: 
+      metadata:
+        name: my_first_pod
+        labels:
+          apps: v1
+      spec:
+        - name: nginx
+       	  image: nignx:latest
+		  containerPort: 80
+		  
+ Details of deployments:
+  In this example, 
+  ●  apiVersion  and  kind  define the resource type.
+  
+  ●  metadata  specify the details of deployment such as  the name of the deployment, and 
+     labels.
+	 
+  ●  spec  defines the desired state of the Deployment. 
+  
+  ●  replicas  specify the desired number of pods to maintain.
+  
+  ●  The  selector  specifies on which pod the replica configuration  should be applied with the 
+     help of the label of the pod.
+	 
+  ●  template  describes the pod template and how deployment  will use it to create new pods.
+  
+  ●  containers  will list the containers to run within  the pod. 
+  
+  ●  name  specifies the name of the container.
+  
+  ●  image  specifies the name that will be used to run  the container. The image will be a 
+  Docker Image. 
+  
+  ●  containerport  specifies the port at which the container  will listen for incoming traffic.  
+		  
+		  
+                	 
