@@ -198,7 +198,7 @@
 
  Deployment files:
 
-  ●  Purpose  : Deployment files contain all information  about the application and define how 
+ ●  Purpose  : Deployment files contain all information  about the application and define how 
                 he application or microservices will be deployed on the Kubernetes cluster. In 
                 eployment files, we can define the desired state, pod replicas, update strategies, and 
                 od templates. 
@@ -256,7 +256,209 @@
   ●  image  specifies the name that will be used to run  the container. The image will be a 
   Docker Image. 
   
-  ●  containerport  specifies the port at which the container  will listen for incoming traffic.  
+  ●  containerport  specifies the port at which the container  will listen for incoming traffic. 
+  
+  
+  Service File 
+   ●  Purpose  : Service files contain all information about  networking. The service file defines 
+      how networking will be handled on the cluster. Also, the Service file enabled the load 
+      balancing option for the applications which is a premium feature of Kubernetes. 
+	  
+   ●  Contents  : The service file specifies the service’s  name, type(ClusterIP, NodePort, 
+      LoadBalancer, etc[Discuss in Upcoming Blogs]), and selectors to route traffic to pods.
+	  
+   ●  Usage  : Service files are used by developers and administrators  to expose and connect 
+      applications within the Kubernetes cluster.
+	  
+   Note  : Services can also be used for internal communication  between Pods within the cluster, 
+           not just for exposing applications externally. 	 
+
+    
+
+ Why do we need Services?
+ ✅ Discoverability: Pods are temporary. Services make sure there’s a permanent way to reach a dynamic set of Pods.
+ ✅ Load Balancing: Services can distribute traffic across multiple Pods (endpoints).
+ ✅ Decoupling: Clients talk to the Service, not directly to Pods — so you can update Pods without clients noticing. 
+ 
+ There are mainly three types of services:
+  
+  1. ClusterIP (default)
+     - Use case: Internal communication inside the cluster.
+     - What it does: Exposes the Service on an internal IP address in the cluster.
+     - Example: A front-end app talks to a back-end database using a ClusterIP service.	 
+   
+    
+	apiVersion: v1
+	kind: Service
+	metadata: 
+	  name: my-backend
+	  labels:
+	    apps: v1
+	spec:
+      selector: 
+	    app: backend
+	  ports:
+        - protocols: TCP
+          port: 80                 #service port
+          targetPort: 8080         #pod port 
+	  type: clusterIP	  
 		  
 		  
-                	 
+		  
+  2. NodePort
+     - Use case: Expose the Service on each Node’s IP at a static port.
+     - What it does: Allocates a port on every Node (the NodePort) and forwards traffic to the Pods.
+	 - Example: You want to test an app from outside the cluster without an Ingress.
+	 
+    apiVersion: v1
+    kind: services
+    metadata:
+      name: my-app
+    spec: 
+      selector:
+        app: my-app
+      type: NodePort
+      ports:
+      - port: 80
+        targetPort: 8080
+        nodePort: 30001		 # Must be in range 30000–32767
+		
+		
+	📌 How it works:
+       <NodeIP>:NodePort → routes to → ClusterIP:Port → routes to → PodIP:TargetPort	
+	   
+	   
+  3. LoadBalancer
+     - Use case: Expose the Service externally using a cloud provider’s external load balancer.
+     - What it does: Creates an external IP and routes traffic to NodePorts behind the scenes.
+	 - Example: Public-facing web app on AWS, GCP, or Azure.
+	 
+	apiVersion: v1
+    kind: Service
+    metadata:
+      name: my-public-app
+      labels: 
+        app: my-app
+    spec:
+      selector:
+        app: my-app
+      type:LoadBalancer
+      ports:
+        - port: 80
+          targetPort: 8080
+ 
+    Note: The cloud provider provisions an external Load Balancer and assigns it a public IP.
+	
+	
+  INGRESS:
+  
+  What is Ingress in Kubernetes?
+  Ingress is an API object in Kubernetes that manages external access to your cluster services, typically HTTP and HTTPS traffic.
+
+  1. Think of Ingress as the “front door” to your cluster:
+
+  2. It defines rules for routing external requests to the right Services or Pods inside your cluster.
+
+  3. It can handle things like path-based routing, host-based routing, SSL/TLS termination, and virtual hosting.
+  
+  
+  How does Ingress fit into the architecture?
+  Client ---> Ingress Controller ---> Ingress Resource ---> Service ---> Pod
+
+  ✅ Client: A user’s browser or app making an HTTP request.
+  ✅ Ingress Controller: The component that implements the routing defined in the Ingress resource.
+  ✅ Ingress Resource: The YAML configuration that declares the rules (paths, hosts, TLS, etc.).
+  ✅ Service: Internal Kubernetes Service that routes to Pods.
+  ✅ Pod: Your actual application container(s).
+    
+  example:
+  
+       apiVersion: networking.k8s.io/v1
+       kind: Ingress
+       metadata:
+         name: example-ingress
+       spec:
+         rules:
+         - host: example.com
+           http:
+             paths:
+             - path: /app1
+               pathType: Prefix
+               backend:
+                 service:
+                   name: app1-service
+                   port:
+                     number: 80
+             - path: /app2
+               pathType: Prefix
+               backend:
+                 service:
+                   name: app2-service
+                   port:
+                     number: 80
+         tls:
+         - hosts:
+           - example.com
+           secretName: example-tls
+		   
+	
+
+ A YAML object that defines:
+
+ Hostnames (example.com)
+ 
+ Paths (/app1, /app2)
+ 
+ Backends (which Service to forward to)
+ 
+ TLS (SSL certificates)
+ 
+ 
+ 
+ How it works?
+ ✅ A client sends an HTTP request to your cluster’s external IP or domain.
+ ✅ The Ingress Controller receives it (through a LoadBalancer Service or NodePort).
+ ✅ The controller reads the Ingress rules and matches:
+    1. Which host (example.com)
+    2. Which path (/app1)
+ 
+ ✅ It forwards the request to the right backend Service → Pods.
+          
+  
+  
+  
+  
+ TLS Termination:
+ Ingress can handle HTTPS using TLS certificates:
+ 1. Certificates are stored in Secrets.
+ 2. The Ingress Controller offloads SSL (so your app Pods don’t have to).
+ 
+ Features you get with Ingress:
+ ✅ Path-based routing: /foo to one service, /bar to another.
+ ✅ Host-based routing: foo.example.com vs. bar.example.com.
+ ✅ Load balancing: Distributes traffic to Pods behind the Service.
+ ✅ SSL/TLS termination: Secure your traffic with HTTPS.
+ ✅ Rewrite & Redirects: Some controllers support advanced features.
+
+
+
+ Difference: LoadBalancer vs Ingress
+  
+ | Feature         | LoadBalancer Service                        | Ingress                                                   |
+ | --------------- | ------------------------------------------- | --------------------------------------------------------- |
+ | Purpose         | Exposes **one Service** with an external IP | Routes **multiple Services** via one external IP / domain |
+ | Protocols       | TCP/UDP                                     | HTTP/HTTPS only                                           |
+ | SSL Termination | Handled externally or at app level          | Handled by Ingress Controller                             |
+ | Cost            | Each LoadBalancer costs \$                  | One Ingress Controller for multiple rules                 |
+ 
+ 
+ 
+ Types of SSL:
+ 1. SSL Passthrough
+ 2. SSL offloading
+ 3. SSL Bridges
+ 
+ 
+ RBAC: Role Based Access Control
+ 
+
