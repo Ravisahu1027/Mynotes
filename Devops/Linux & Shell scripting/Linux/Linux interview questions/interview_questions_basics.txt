@@ -1,0 +1,62 @@
+Linux L2/L3 Engineer (3-5 years experience)
+
+1. Explain the Linux Boot Process
+
+ • Steps: BIOS → Bootloader (e.g., GRUB) → Kernel → Init/Systemd → Services/Runlevel.
+ • Purpose: Initializes hardware, mounts root filesystem, starts user-space processes.
+
+2. Troubleshooting a Slow Server
+
+ • Check: top, vmstat, free (CPU, memory), df (disk), ss/netstat (network).
+ • Action: Optimize processes, terminate resource hogs, or upgrade hardware.
+
+3. Linux File Permissions
+
+ • Types: Read, write, execute for owner, group, others.
+ • Commands:
+ • chmod (change permissions)
+ • chown (change owner)
+ • chgrp (change group).
+
+4. What is LVM?
+
+ • Definition: Logical Volume Manager for flexible disk management.
+ • Commands:
+ • pvcreate (physical volume), vgcreate (volume group), lvcreate (logical volume).
+ • Resize with lvextend/lvreduce.
+
+5. Securing a Linux Server
+
+ • Steps:
+ • Disable unused services.
+ • Configure iptables/firewalld.
+ • Enforce SSH security (disable root login, use SSH keys).
+ • Enable SELinux/AppArmor.
+ • Patch regularly.
+ • Use Fail2ban for brute-force protection.
+
+6. Managing Services
+
+ • Commands:
+ • systemctl (start, enable services).
+ • Legacy: service or /etc/init.d/.
+
+7. Adding Users and Managing Permissions
+
+ • Commands:
+ • Add: useradd username, passwd username.
+ • Groups: usermod -aG groupname username.
+ • Permissions: chmod, chown.
+
+8. Monitoring Server Performance
+
+ • Tools:
+ • Real-time: top, htop.
+ • Historical: sar.
+ • Disk: iostat.
+ • Network: ss, netstat.
+
+9. Filesystem Corruption Recovery
+
+ • Steps: Boot in single-user mode or live CD → Run fsck → Restore from backups.
+ • Preventive: Regular backups.

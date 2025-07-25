@@ -1,0 +1,21 @@
+Default Ports Every DevOps Professional Should Know!
+
+In the world of DevOps and Networking, ports are essential for communication between services and servers. Each service or protocol uses a specific port to handle requests. Here are some commonly used default ports that every DevOps professional should know:
+
+Port 22 - SSH: For secure remote login and file transfers.
+Port 80 - HTTP: Standard port for unencrypted web traffic.
+Port 443 - HTTPS: Secure, encrypted web traffic.
+Port 3000 - Grafana: Used for monitoring and dashboards.
+Port 9090 - Prometheus: For collecting metrics and monitoring.
+Port 25 - SMTP: For sending emails.
+Port 53 - DNS: Resolves domain names to IP addresses.
+Port 3306 - MySQL: Default port for MySQL databases.
+Port 6379 - Redis: Fast in-memory data storage (caching).
+Port 5601 - Kibana: For visualizing data from Elasticsearch.
+Port 9100 - Node Exporter: Collects hardware and OS metrics for Prometheus.
+Port 3100 - Loki: Log aggregation system for storing and querying logs.
+Port 9200 - Elasticsearch: Used for full-text search and log analytics.
+Port 8080 - Tomcat: Default HTTP port for Apache Tomcat server.
+Port 5432 - PostgreSQL: Default port for PostgreSQL database connections.
+
+These are just a few essential ports that help maintain smooth networking and service management.

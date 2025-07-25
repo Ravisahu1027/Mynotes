@@ -1,0 +1,33 @@
+most asked interview questions for 2+ years of experience in CI/CD, Linux, Docker, and Jenkins:
+
+CI/CD:
+
+1 What is the difference between continuous integration, continuous delivery, and continuous deployment?
+2 How do you manage and automate CI/CD pipelines across multiple environments?
+3 How do you implement rollbacks in a CI/CD pipeline?
+4 What are some common CI/CD tools, and why would you choose one over the others?
+5 How do you monitor and debug issues in a CI/CD pipeline?
+
+Linux: 
+
+1How do you check the available disk space and memory usage in Linux?
+2What is the difference between grep, find, and awk commands?
+3How do you set up and manage a cron job?
+4Explain the difference between chmod, chown, and chgrp.
+5How do you analyze and resolve high CPU or memory usage in Linux?
+
+Docker:
+
+1What is the difference between Docker images and containers?
+2How do you create and optimize a Dockerfile for a specific application?
+3What is the purpose of Docker Compose, and how is it used?
+4How do you handle container networking in Docker?
+5Explain the difference between bind mounts, volumes, and tmpfs in Docker.
+
+Jenkins:
+
+1How do you set up a Jenkins pipeline to deploy an application?
+2What is the difference between a freestyle job and a pipeline in Jenkins?
+3How do you secure a Jenkins server?
+4How do you configure Jenkins agents, and what are their purposes?
+5What is Blue Ocean in Jenkins, and how is it used?

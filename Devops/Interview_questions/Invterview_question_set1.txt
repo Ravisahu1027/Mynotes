@@ -1,0 +1,25 @@
+****Interview Question For DevOps Engineer****
+hashtag#interview
+
+1. Tell me about your project?
+2. How does GitLab trigger pipelines automatically when a developer pushes code?
+3. How do you declare dependent stages in a CI/CD YAML file?
+4. What is `terraform init`?
+5. What is `backend.tf`?
+6. What does `terraform plan` do?
+7. What happens if you give the wrong configuration or code in Terraform and run it?
+8. Where do you store Docker images?
+9. Kubernetes: Describe the `pod` command?
+10. How do you declare context in Kubernetes?
+11. What if you have more contexts and namespaces in Kubernetes?
+12. What are the types of services in Kubernetes?
+13. NodePort vs. ClusterIP — What's the difference?
+14. Horizontal Pod Scaling vs. Vertical Pod Scaling — Explain?
+15. Limit vs. request in a Kubernetes manifest file?
+16. What is AWS Lambda, and what have you done with it?
+17. How do you set up CloudWatch alarms, metrics, and alerts?
+18. How do you create dashboards on CloudWatch for different resources or services on AWS?
+19. Which build tool do you use for Java? How about for Python?
+20. Explain the complete structure of GitLab CI/CD with stages?
+21. How do you integrate Azure DevOps with AWS for deployments?
+22. Write Terraform code for an EC2 instance with security groups using depends_on?
