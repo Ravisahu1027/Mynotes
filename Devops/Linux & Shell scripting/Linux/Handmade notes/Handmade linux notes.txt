@@ -14,8 +14,24 @@
   
   shell: it is interface between user and kernal and use to interprete command into binary language give to kernal
          so that hardwares can understand.
-	   
-	   
+		 
+		  Diagram Representation (Textual)
+          
+          +---------------------------+
+          |     User Applications     |
+          +---------------------------+
+          |  Shell / GUI (User Space) |
+          +---------------------------+
+          |     System Utilities      |
+          +---------------------------+
+          |     System Libraries      |
+          +---------------------------+
+          |          Kernel           |
+          +---------------------------+
+          |         Hardware          |
+          +---------------------------+
+          	   
+          	   
 -----------------------------------------------------Filesystem hierarchy: EP 8----------------------------------------------------	 
  
  Root Directory(/) :- Parent directory of all directory. Under which all directories are present. 
@@ -39,7 +55,7 @@
  
  /sbin: all the binary excutable file for super user (root user) are stored in this directory.
  
- /dev: It contain all device related files. like SDA1, SDA2.
+ /dev: It contain all device related files. like SDA1, SDA2. 
  
  /proc: all the process related information files comes under this directory.
  
@@ -144,7 +160,7 @@
  
   grep -c allowed file1.txt (it will give count or no. of occurance of that pattern).
   grep -n allowed file1.txt (display line no. and pattern).
-  grep -i allowed file1.txt (search pattern even ignore case sensitive capital small character.
+  grep -i allowed file1.txt (search pattern even ignore case sensitive capital small character).
   
   
 ---------------Linux Basic Command, Softlink, Hardlink, Inode, Normal file, Directory file : EP 13------------------------------
@@ -225,8 +241,8 @@
    - find <path/to/directory> -type f -name ".syslog" -exec rm -rf  {} \;   to remove file with .syslog extentions.
    
  3. To Find file with time and size.
-   -find . -type f -size +10M 
-   -find . -type f -mtime -75   
+   - find . -type f -size +10M 
+   - find . -type f -mtime -75   
    
    
 -------------------------------------------Linux Basic Command | File Permission : EP 16--------------------------------------------
@@ -416,7 +432,7 @@
  
   question: How many fields are their in fstab file ?
   answer  : there are total 6 fields will be there.
-            1st - device name, 2nd - mount point , 3rd - type of filesystem, 4th - mount option, 5th- dumping, 6th - sequece  
+            1st - disk ok name, 2nd - mount point , 3rd - type of filesystem, 4th - mount option, 5th- dumping, 6th - sequece  
 	  
 	  
   TO UNMOUNT THE Directory 
@@ -920,9 +936,9 @@
 		
 		To Get boolen values: getbool -a | grep ftp and To set we have to give setbool line <on/off>
 		
-------------------------------Linux/Unix Booting Process, BIOS, MBR, GRUB, KERNEL, INIT, RUNLEVEL : EP 32--------------------------------------------
+-------------------Linux/Unix Booting Process, BIOS, MBR, GRUB, KERNEL, INIT, RUNLEVEL : 32--------------------------------------------
 
- 		
+ 
  		
 	   *BIOS : Basic input/output system.
 	   *MBR : Master boot Recorder.
@@ -975,7 +991,7 @@
 
            Mounts the root filesystem (read-only at first).
 
-           Starts initrd or initramfs to prepare the real root FS.
+           Starts initrd or initramfs to prepare the real root Filesystem.
 
            Then: Executes the first user-space process → init (or systemd in modern systems).		
 		   

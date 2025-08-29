@@ -1,0 +1,20 @@
+
+ 📌𝗛𝗖𝗟 𝗜𝗻𝘁𝗲𝗿𝘃𝗶𝗲𝘄 𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻𝘀 – 𝗔𝗪𝗦 𝗗𝗲𝘃𝗢𝗽𝘀 𝗘𝗻𝗴𝗶𝗻𝗲𝗲𝗿 (𝗧𝗲𝗰𝗵𝗻𝗶𝗰𝗮𝗹 𝗥𝗼𝘂𝗻𝗱 𝟭)
+If you're preparing for 𝗔𝗪𝗦 𝗗𝗲𝘃𝗢𝗽𝘀 roles, this might help you getting one step closer to crack interview:
+
+1. How do you manage Terraform state files when working in a team?
+2. What approach do you take to avoid or resolve state file conflicts in Terraform?
+3. Can you write a Terraform configuration to provision multiple S3 buckets?
+4. What kind of CI/CD pipelines have you built using Jenkins?
+5. How would you integrate Jenkins with SonarQube for code quality checks?
+6. How does Jenkins authenticate with Docker registries when pushing images?
+7. Have you worked with Kubernetes? What deployment strategy do you prefer and why?
+8. How have you implemented blue-green deployment in a Kubernetes environment?
+9. What is HPA in Kubernetes, and when would you use it?
+10. Suppose a new deployment introduces issues — how would you roll back to the previous stable version using Kubernetes?
+11. What is the purpose of StatefulSets in Kubernetes, and how are they different from Deployments?
+12. What types of IAM policies exist in AWS? Can you explain their differences?
+13. How are S3 bucket policies different from ACLs?
+14. What’s your understanding of dynamic auto scaling in AWS?
+15. Can you explain the key differences between AWS Security Groups and Network ACLs?
+16. Which AWS services have you worked with most, and how have you used them in your DevOps projects?

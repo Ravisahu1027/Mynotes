@@ -1,0 +1,123 @@
+\documentclass[10pt,letterpaper]{article}
+
+% Packages
+\usepackage[ignoreheadfoot,top=2cm,bottom=2cm,left=2cm,right=2cm,footskip=1cm]{geometry}
+\usepackage{titlesec,tabularx,array,xcolor,enumitem,fontawesome5,amsmath,bookmark,lastpage,changepage,paracol,ifthen,needspace,iftex}
+\definecolor{primaryColor}{RGB}{0,79,144}
+\usepackage[pdftitle={Subhash Chandrawanshi CV},pdfauthor={Subhash Chandrawanshi},pdfcreator={LaTeX},colorlinks=true,urlcolor=primaryColor]{hyperref}
+
+% ATS-readable PDF
+\ifPDFTeX
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+  \usepackage[utf8]{inputenc}
+  \usepackage{lmodern}
+\fi
+
+% Formatting
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\columnsep}{0cm}
+\renewcommand\labelitemi{$\circ$}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+\titlespacing{\section}{-1pt}{0.3cm}{0.2cm}
+
+% Custom Environments
+\newenvironment{highlights}{\begin{itemize}[topsep=0.1cm,parsep=0.1cm,itemsep=0pt,leftmargin=0.5cm]}{\end{itemize}}
+\newenvironment{highlightsforbulletentries}{\begin{itemize}[topsep=0.1cm,itemsep=0pt,leftmargin=10pt]}{\end{itemize}}
+\newenvironment{onecolentry}{\begin{adjustwidth}{0.2cm}{0.2cm}}{\end{adjustwidth}}
+\newenvironment{twocolentry}[1]{\onecolentry\def\secondColumn{#1}\setcolumnwidth{\fill,4.5cm}\begin{paracol}{2}}{\switchcolumn\raggedleft\secondColumn\end{paracol}\endonecolentry}
+
+% Header
+\begin{document}
+
+\begin{center}
+    {\LARGE\textbf{SUBHASH CHANDRAWANSHI}} \\[4pt]
+    \href{mailto:subhashc4329@gmail.com}{\faEnvelope\hspace{3pt}subhashc4329@gmail.com} \hspace{15pt}
+    \href{tel:+917697427782}{\faPhone\hspace{3pt}+91 7697427782} \hspace{15pt}
+    \href{https://www.linkedin.com/in/subhash-chandrawanshianshi}{\faLinkedin\hspace{3pt}subhash-chandrawanshianshi}
+\end{center}
+
+% ---------------- SUMMARY ----------------
+\section{Professional Summary}
+\begin{onecolentry}
+Results-driven Field Sales Executive with experience in the Ready-Mix Concrete (RMC) industry at Adani Cement (ACC Ambuja). Skilled in lead generation, cold calling, on-site client engagement, and driving new customer acquisition. Expertise in sales negotiations, deal closures, order follow-ups, and payment collections, ensuring smooth order fulfillment and accurate billing (PBDD). Proven ability to build strong client relationships, improve retention, and achieve revenue targets by collaborating with operations teams for timely deliveries.
+\end{onecolentry}
+
+% ---------------- SKILLS ----------------
+\section{Key Skills}
+\begin{onecolentry}
+\begin{highlightsforbulletentries}
+    \item \textbf{Technical:} MS Office, Canva, AI Tools
+    \item \textbf{Interpersonal:} Communication, Problem-Solving, Leadership, Negotiation, Customer Relationship Management, Time Management, Multitasking
+\end{highlightsforbulletentries}
+\end{onecolentry}
+
+% ---------------- EXPERIENCE ----------------
+% ---------------- EXPERIENCE ----------------
+\section{Professional Experience}
+
+\begin{twocolentry}{\textit{Apr 2025 – Present}}
+    \textbf{Adani Cement (ACC Ambuja)} \\ \textit{Field Sales Executive}
+\end{twocolentry}
+
+\begin{onecolentry}
+\begin{highlights}
+    \item Generated leads through market research, cold calling, and on-site visits, resulting in increased customer acquisition in the RMC sector.
+    \item Negotiated deals, closed sales, and managed payment collections, consistently achieving revenue goals.
+    \item Coordinated with logistics and operations teams for timely deliveries and accurate billing (PBDD verification).
+    \item Built long-term client relationships, improving retention, repeat business, and referrals.
+\end{highlights}
+\end{onecolentry}
+
+\begin{twocolentry}{\textit{May 2024 – Jul 2024}}
+    \textbf{Cornea World} \\ \textit{Business Development Intern}
+\end{twocolentry}
+
+\begin{onecolentry}
+\begin{highlights}
+    \item Conducted market research, cold calling, and 150+ field visits to generate institutional sales leads.
+    \item Delivered product demonstrations of digital whiteboards and standees to key organizations.
+    \item Closed deals with 2 institutions, leading to the installation of 50 digital whiteboards.
+    \item Maintained follow-ups via emails, calls, and meetings, improving conversion rates and client engagement.
+\end{highlights}
+\end{onecolentry}
+
+
+% ---------------- EDUCATION ----------------
+\section{Education}
+
+\begin{twocolentry}{\textit{Sept 2023 – May 2025}}
+    \textbf{IIEBM, Indus Business School, Pune} \\ \textit{Post Graduate Diploma in Management}
+\end{twocolentry}
+
+\begin{twocolentry}{\textit{Aug 2018 – May 2022}}
+    \textbf{Rungta College of Engineering and Technology, Bhilai} \\ \textit{B.Tech in Electrical Engineering}
+\end{twocolentry}
+
+% ---------------- CERTIFICATIONS ----------------
+\section{Certifications}
+\begin{onecolentry}
+\begin{highlightsforbulletentries}
+    \item Marketing Essentials – IIMBx
+    \item Economics of Consumer Demand – BabsonX
+\end{highlightsforbulletentries}
+\end{onecolentry}
+
+% ---------------- RESEARCH & PROJECTS ----------------
+\section{Research and Projects}
+
+\begin{twocolentry}{\textit{Research Study}}
+    \textbf{Adoption of Electric Vehicles in India: Mediating Role of Consumer Attitudes} \\
+    Conducted research on factors influencing EV adoption in India, analyzing consumer awareness, perceptions, and behavioral intentions.
+\end{twocolentry}
+
+\begin{twocolentry}{\textit{Academic Project}}
+    \textbf{Overvoltage and Undervoltage Protection System using Arduino with GSM Alert} \\
+    Designed and implemented a microcontroller-based system to detect voltage fluctuations and send real-time alerts via GSM.
+\end{twocolentry}
+
+\end{document}

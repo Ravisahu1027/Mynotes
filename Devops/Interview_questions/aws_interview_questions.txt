@@ -1,0 +1,195 @@
+Here’s a complete list of AWS Cloud Engineer L1/L2 Interview Questions with Answers – formatted clearly for your study or documentation:
+
+1. How would you troubleshoot an EC2 instance that is unreachable (e.g., cannot SSH in)?
+Answer:
+
+Check Security Group: Ensure port 22 is open to your IP.
+
+Verify NACLs and Route Tables.
+
+Confirm EC2 instance state and System/Instance Status Checks.
+
+View EC2 console output or instance logs for boot issues.
+
+Use SSM Session Manager (if enabled).
+
+Use VPC Reachability Analyzer to trace network path.
+
+2. How do you secure access to EC2 instances?
+Answer:
+
+Use SSH key pairs for login.
+
+Restrict access using Security Groups (allow only trusted IPs).
+
+Use IAM roles to grant AWS permissions without hardcoding credentials.
+
+Deploy Bastion Host in public subnet to access private instances.
+
+Enable AWS Systems Manager (SSM) for agent-based secure access.
+
+3. What is the difference between an EC2 instance store volume and an EBS volume?
+Answer:
+
+Instance Store: Temporary storage tied to instance lifecycle; data lost on stop/terminate.
+
+EBS Volume: Persistent block storage; survives stop/start cycles.
+
+Use Case: Instance Store for cache/temp files, EBS for databases and app data.
+
+4. How can you connect to an EC2 instance in a private subnet with no public IP?
+Answer:
+
+Through a Bastion Host in public subnet.
+
+Use AWS Systems Manager Session Manager (if agent and permissions are configured).
+
+Via VPN connection or AWS Direct Connect.
+
+5. What is an AWS VPC and why is it important?
+Answer:
+
+A Virtual Private Cloud (VPC) is an isolated network environment within AWS.
+
+Lets you define subnets, route tables, gateways, and security controls.
+
+Essential for designing secure and scalable architectures.
+
+6. How do Security Groups differ from Network ACLs?
+Answer:
+
+Feature	Security Groups	Network ACLs
+Level	Instance level	Subnet level
+Stateful	Yes	No (stateless)
+Rules	Only allow	Allow and deny
+Use Case	App-level control	Additional subnet layer of security
+
+7. Your app runs in a private subnet but needs to access the internet. What do you configure?
+Answer:
+
+Deploy a NAT Gateway (or NAT Instance) in a public subnet.
+
+Update the route table of private subnet to forward traffic to NAT.
+
+8. How can resources in different VPCs or accounts communicate securely?
+Answer:
+
+Use VPC Peering or Transit Gateway.
+
+For service-specific communication, use VPC Endpoints or PrivateLink.
+
+Use Site-to-Site VPN for secure encrypted communication.
+
+9. What is AWS IAM and why is it important?
+Answer:
+
+IAM (Identity and Access Management) controls access to AWS services/resources.
+
+Enables user, group, and role management.
+
+Crucial for security, compliance, and enforcing least privilege.
+
+10. What's the difference between IAM user, group, and role?
+Answer:
+
+User: Human identity with login credentials.
+
+Group: Collection of users with common policies.
+
+Role: Assigned to users/services for temporary access. Use for EC2, Lambda, cross-account access.
+
+11. What is Amazon CloudWatch and what can it collect?
+Answer:
+
+A monitoring service for AWS resources.
+
+Collects metrics (CPU, memory), logs (application/system), and events.
+
+Enables setting alarms and dashboard visualizations.
+
+12. How do you set a CloudWatch alarm for high CPU usage?
+Answer:
+
+Go to CloudWatch → Alarms → Create Alarm.
+
+Select EC2 → CPUUtilization metric.
+
+Set threshold (e.g., CPU > 80% for 5 mins).
+
+Add SNS topic for email/SMS notifications.
+
+13. What is Amazon S3 and common use cases?
+Answer:
+
+Scalable object storage service.
+
+Use cases: backups, log storage, static websites, media files, data lakes, and app assets.
+
+14. How do you secure data in S3?
+Answer:
+
+Bucket Policies: Define who can access what.
+
+IAM Permissions: Role/user-level access control.
+
+ACLs: Legacy permission mechanism (not recommended for new apps).
+
+Encryption: Use SSE-S3, SSE-KMS for encryption at rest.
+
+Enable MFA Delete, Versioning, and Access Analyzer.
+
+15. What is Amazon RDS and how is it different from databases on EC2?
+Answer:
+
+Amazon RDS: Managed relational DB service (MySQL, PostgreSQL, etc.).
+
+Handles backups, patching, scaling, and failover.
+
+EC2-hosted DBs require manual maintenance.
+
+16. How do you ensure high availability and backups in RDS?
+Answer:
+
+Multi-AZ deployment for failover.
+
+Read Replicas for performance/scaling.
+
+Use automated backups and manual snapshots for recovery.
+
+17. How does an AWS Elastic Load Balancer (ELB) work?
+Answer:
+
+Distributes traffic across EC2 instances.
+
+Supports health checks, autoscaling, and SSL termination.
+
+ALB (L7): HTTP/S, routing by path/host.
+
+NLB (L4): TCP/UDP, ultra-low latency.
+
+18. How does Auto Scaling work in AWS?
+Answer:
+
+Auto Scaling Groups maintain EC2 fleet based on demand.
+
+Configure launch templates/config, min/max/desired capacity.
+
+Use CloudWatch metrics to scale in/out (e.g., CPU, request count).
+
+19. What is Amazon Route 53 and how does it help with availability?
+Answer:
+
+A DNS service to manage domain routing.
+
+Supports health checks, failover, geo-routing, latency-based routing.
+
+Ensures high availability via intelligent routing policies.
+
+20. When would you use a Route 53 Alias record over a CNAME?
+Answer:
+
+Alias can point to AWS resources (e.g., ELB, CloudFront).
+
+Works at root domain level (e.g., example.com → ELB).
+
+Avoids extra DNS lookup unlike CNAME.

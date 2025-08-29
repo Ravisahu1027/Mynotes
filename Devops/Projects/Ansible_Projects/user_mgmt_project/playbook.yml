@@ -1,0 +1,8 @@
+---
+name: user and group management
+hosts: ALL
+become: true
+vars:
+  group: devops
+roles:
+  - user_managment  
